@@ -29,7 +29,7 @@ Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])->name(
 
 Route::middleware('admin.auth')->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('admin.admin-dashboard');
     })->name('admin.home');
 });
 
