@@ -25,91 +25,99 @@
     <!-- Favicon -->
     <link href="" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
     <link href="" sizes="128x128" rel="shortcut icon" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body data-spy="scroll">
-    
-        @include('admin.adminlayouts.buyer-header')
 
-        <main>
-            @yield('content')
-        </main>
+    @include('admin.adminlayouts.buyer-header')
 
-        @include('admin.adminlayouts.buyer-footer')
+    <main>
+        @yield('content')
+    </main>
 
-        <!-- Wrapper End -->
-        <script src="js/jquery-3.6.0.js"></script>
-        <script src="js/jquery-migrate-3.0.0.min.js"></script>
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/bootstrap-select.min.js"></script>
-        <script src="js/chart.min.js"></script>
-        <script src="js/chart-custome.js"></script>
-        <script src="js/jquery.mmenu.all.js"></script>
-        <script src="js/ace-responsive-menu.js"></script>
-        <script src="js/parallax.js"></script>
-        <script src="js/jquery-scrolltofixed-min.js"></script>
-        <script src="js/wow.min.js"></script>
-        <script src="js/slider.js"></script>
-        <script src="js/range-slider.js"></script>
-        <script src="js/dashboard-script.js"></script>
-        <!-- Custom script for all pages -->
-        <script src="js/script.js"></script>
+    @include('admin.adminlayouts.buyer-footer')
 
-        <!--buyer-dashboard-script-start-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-        <!--buyer-dashboard-script-end-->
+    <!-- Wrapper End -->
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/jquery-migrate-3.0.0.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <script src="js/chart.min.js"></script>
+    <script src="js/chart-custome.js"></script>
+    <script src="js/jquery.mmenu.all.js"></script>
+    <script src="js/ace-responsive-menu.js"></script>
+    <script src="js/parallax.js"></script>
+    <script src="js/jquery-scrolltofixed-min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/slider.js"></script>
+    <script src="js/range-slider.js"></script>
+    <script src="js/dashboard-script.js"></script>
+    <!-- Custom script for all pages -->
+    <script src="js/script.js"></script>
+
+    <!--buyer-dashboard-script-start-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <!--buyer-dashboard-script-end-->
 
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                // Pie chart
-                new Chart(document.getElementById("chartjs-dashboard-pie"), {
-                    type: "pie",
-                    data: {
-                        labels: ["Direct", "Affiliate", "E-mail", "Other"],
-                        datasets: [{
-                            data: [2602, 1253, 541, 1465],
-                            backgroundColor: [
-                                window.theme.primary,
-                                window.theme.warning,
-                                window.theme.danger,
-                                "#E8EAED"
-                            ],
-                            borderWidth: 5,
-                            borderColor: window.theme.white
-                        }]
-                    },
-                    options: {
-                        responsive: !window.MSInputMethodContext,
-                        maintainAspectRatio: false,
-                        cutoutPercentage: 70,
-                        legend: {
-                            display: false
-                        }
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Pie chart
+            new Chart(document.getElementById("chartjs-dashboard-pie"), {
+                type: "pie",
+                data: {
+                    labels: ["Direct", "Affiliate", "E-mail", "Other"],
+                    datasets: [{
+                        data: [2602, 1253, 541, 1465],
+                        backgroundColor: [
+                            window.theme.primary,
+                            window.theme.warning,
+                            window.theme.danger,
+                            "#E8EAED"
+                        ],
+                        borderWidth: 5,
+                        borderColor: window.theme.white
+                    }]
+                },
+                options: {
+                    responsive: !window.MSInputMethodContext,
+                    maintainAspectRatio: false,
+                    cutoutPercentage: 70,
+                    legend: {
+                        display: false
                     }
-                });
+                }
             });
-        </script>
+        });
+    </script>
 
-        <script>
-            var dropdown = document.getElementsByClassName("dropdown-btn-admin-dashboard-sidebar");
-            var i;
+    <script>
+        var dropdown = document.getElementsByClassName("dropdown-btn-admin-dashboard-sidebar");
+        var i;
 
-            for (i = 0; i < dropdown.length; i++) {
-                dropdown[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    var dropdownContent = this.nextElementSibling;
-                    if (dropdownContent.style.display === "block") {
-                        dropdownContent.style.display = "none";
-                    } else {
-                        dropdownContent.style.display = "block";
-                    }
-                });
-            }
-        </script>
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+    </script>
 
 </body>
 
