@@ -6,6 +6,7 @@ use App\Http\Controllers\BuyerRegistrationController;
 use App\Http\Controllers\SellerRegistrationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\SellerController;
 
 // admin registration
 Route::prefix('admin')->group(function () {
@@ -29,15 +30,29 @@ Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])->name(
 
 Route::middleware('admin.auth')->group(function () {
     Route::get('/', function () {
-        return view('admin.all-buyer');
+        return view('admin.admin-dashboard');
     })->name('admin.home');
     
-    Route::get('buyers/{id}', [BuyerController::class, 'show'])->name('admin.buyers.show');
+   
+    
+    Route::get('buyers/{id}/edit', [BuyerController::class, 'edit'])->name('admin.buyers.edit');
     Route::put('buyers/{id}', [BuyerController::class, 'update'])->name('admin.buyers.update');
     Route::delete('buyers/{id}', [BuyerController::class, 'destroy'])->name('admin.buyers.destroy');
     Route::get('buyers-count', [BuyerController::class, 'count'])->name('admin.buyers.count');
     Route::get('all-buyers', [BuyerController::class, 'allBuyersdata'])->name('admin.buyers.all');
+
+    
+    Route::get('/all-gst/{id}', [BuyerController::class, 'getAddressByUserId'])->name('admin.addresses.byUserId');
+    Route::get('/buyer-rfq-count/{buyerId}', [BuyerController::class, 'rfqcountByBuyerId'])->name('admin.rfq.count');
+    Route::get('/buyer-all-rfq/{buyerId}', [BuyerController::class, 'allRfq'])->name('admin.rfq.list');
+    
+
+    Route::get('all-sellers', [SellerController::class, 'allBuyersdata'])->name('admin.sellers.all');
+    Route::delete('sellers/{id}', [SellerController::class, 'destroy'])->name('admin.sellers.destroy');
+
+
 });
+
 
 Route::middleware('buyer.auth')->group(function () {
     Route::get('/buyer/dashboard', function () {
@@ -51,4 +66,10 @@ Route::middleware('seller.auth')->group(function () {
     })->name('seller.home');
 });
 
+
 Route::post('/logout', 'Auth\LogoutController@logout')->name('logout');
+
+
+Route::get("test",function(){
+    return view('admin.test');
+});

@@ -5,7 +5,9 @@
          <div class="row">
            <div class="col-lg-2 col-xxl-2">
              <div class="header_top_logo_home1">
-               <div class="logo"><img src="images/images/logo.jpg"></div>
+             <div class="logo">
+               <img src="{{ asset('images/images/logo.jpg') }}" alt="Logo">
+             </div>
              </div>
            </div>
            <div class="col-lg-5 col-xxl-6">
@@ -40,7 +42,7 @@
                                <ul>
                                  <li>
                                    <div class="thumb">
-                                     <img src="images/listing/sf1.png" alt="sf1.png">
+                                     <img src=" {{ asset('images/images/listing/sf1.png') }}" alt="sf1.png">
                                    </div>
                                    <div class="info-product">
                                      <div class="item_title">Sony DJ Headphones 4334205465, Black, Standard</div>
@@ -87,9 +89,9 @@
                            
                            <!-- <img src="{{ asset('public/assets_new/images/buyer-dashboard/' . @$udata->profile_img) }}">
                       
-                           <img src="{{ asset('public/assets_new/images/buyer-dashboard/dummy-profilee.jpg') }}"> -->
+                           <img src="{{ asset('public/assets_new/images/buyer-dashboard/dummy-profilee.jpg') }}">
                            <img src="images/buyer-dashboard/client.png">
-                         
+                          -->
                                                  </div>
                          <div class="details">
                            <p class="subtitle">Welcome</p>
@@ -224,7 +226,7 @@
            <div class="posr logo1 home1_style">
              <div id="mega-menu">
                <a class="btn-mega" href="#">
-                 <img class="me-2" src="images/desktop-nav-menu-white.svg" alt="Desktop Menu Icon">
+                 <img class="me-2" src="{{ asset('images/desktop-nav-menu-white.svg') }}" alt="Desktop Menu Icon">
                  <span class="fw500 fz16 color-white vam">Browse Categories</span>
                </a>
                <ul class="menu">
@@ -1265,7 +1267,7 @@
                <a class="menubar" href="#menu"><span></span></a>
    
                <a class="mobile_logo" href="/"><span class="text-thm">
-                 <img src="images/images/logo.jpg">
+               <img src="{{ asset('images/images/logo.jpg') }}" alt="Logo">
                </span></a>
    
              </div>
@@ -1284,7 +1286,7 @@
                            @else
                            <img src="{{ asset('public/assets_new/images/buyer-dashboard/dummy-profilee.jpg') }}">
                            @endif -->
-                           <img src="images/buyer-dashboard/client.png">
+                           <img src="assest('images/buyer-dashboard/client.png')">
                          </div>
                          <!--<div class="details">
                            <p class="subtitle">Welcome</p>
