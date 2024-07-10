@@ -16,7 +16,7 @@
       <i class="fa fa-caret-down ml10"></i>
       </button>
       <div class="admin-dashboard-sdebar-dropdown-options">
-         <a href="all-buyer">- All Buyers</a>
+         <a href="{{ route('admin.buyers.all') }}">- All Buyers</a>
          <!-- <a href="#">Link 2</a>
             <a href="#">Link 3</a> -->
       </div>
@@ -28,7 +28,7 @@
       <i class="fa fa-caret-down ml10"></i>
       </button>
       <div class="admin-dashboard-sdebar-dropdown-options">
-         <a href="all-seller">- All Sellers</a>
+         <a href="{{ route('admin.sellers.all') }}">- All Sellers</a>
          <!-- <a href="#">Link 2</a>
             <a href="#">Link 3</a> -->
       </div>
@@ -91,28 +91,9 @@
 <div class="col-xl-12">
    <div class="admin-dashboard-searchbar-radio-button-outer">
       <div class="radio-button-admin-dashboard-outer">
-         <form class="radio-button-admin-dashboard" action="">
-            <div class="admin-dashboard-radio-button-input">
-                                    <input type="radio" id="all" name="all" value="all">
-                                   <label class="admin-dashboard-radio-button-label" for="all">ALL SELLER</label>
-            </div>
-            <div class="admin-dashboard-radio-button-input">
-                                      <input type="radio" id="Individual" name="all" value="Individual">
-                               <label class="admin-dashboard-radio-button-label" for="Individual">TYPE 2</label>
-            </div>
-            <div class="admin-dashboard-radio-button-input">
-                                         <input type="radio" id="company" name="all" value="company">
-                                  <label class="admin-dashboard-radio-button-label" for="company">TYPE 3</label>
-            </div>
-            <!--<input type="submit" value="Submit"> -->
-         </form>
+        
       </div>
-      <div class="admin-dashboard-search-bar-outer">
-         <form class="searchbar-admin-dashboard-outer" action="">
-            <input type="text" placeholder="Search.." name="search" class="searchbar-admin-dashboard">
-            <button class="searchbar-icon-admin-dashboard" type="submit"><i class="fa fa-search"></i></button>
-         </form>
-      </div>
+      
       <button class="back-button-for-rfq-buyer" onclick="" tabindex="-1" aria-disabled="true"> 
       Export
       </button>
@@ -124,7 +105,7 @@
       <div class="row d-block d-sm-flex justify-content-center justify-content-sm-between">
       </div>
       <div class="order_table table-responsive">
-         <table class="table">
+         <table class="table" id="dataTable">
             <thead>
                <tr>
                   <th scope="col" class="heading-buyer-dashboard-recent-activity">S. No.</th>
@@ -138,46 +119,18 @@
                </tr>
             </thead>
             <tbody>
+            @foreach($sellers as $index => $seller)
                <tr class="buyer-dashboard-recent-activity-table-outer">
-                  <td class="buyer-dashboard-right-border">01</td>
-                  <td class="buyer-dashboard-right-border">John</td>
-                  <td class="buyer-dashboard-right-border">abc@gmail.com</td>
-                  <td class="buyer-dashboard-right-border">9876543210</td>
-                  <td class="buyer-dashboard-right-border">22AAAAA0000A1Z5</td>
-                  <td class="buyer-dashboard-right-border">ABCTY1234D</td>
-                  <td class="buyer-dashboard-right-border">D 235A...</td>
-                  <td class="buyer-dashboard-right-border">Seoily</td>
+                  <td class="buyer-dashboard-right-border">{{ $index+1 }}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->name}}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->email }}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->phone_number }}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->gst_number }}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->pan_number }}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->address }}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->company_name}}</td>
                </tr>
-               <tr class="buyer-dashboard-recent-activity-table-outer">
-                  <td class="buyer-dashboard-right-border">02</td>
-                  <td class="buyer-dashboard-right-border">John</td>
-                  <td class="buyer-dashboard-right-border">abc@gmail.com</td>
-                  <td class="buyer-dashboard-right-border">9876543210</td>
-                  <td class="buyer-dashboard-right-border">22AAAAA0000A1Z5</td>
-                  <td class="buyer-dashboard-right-border">ABCTY1234D</td>
-                  <td class="buyer-dashboard-right-border">D 235A...</td>
-                  <td class="buyer-dashboard-right-border">Seoily</td>
-               </tr>
-               <tr class="buyer-dashboard-recent-activity-table-outer">
-                  <td class="buyer-dashboard-right-border">03</td>
-                  <td class="buyer-dashboard-right-border">John</td>
-                  <td class="buyer-dashboard-right-border">abc@gmail.com</td>
-                  <td class="buyer-dashboard-right-border">9876543210</td>
-                  <td class="buyer-dashboard-right-border">22AAAAA0000A1Z5</td>
-                  <td class="buyer-dashboard-right-border">ABCTY1234D</td>
-                  <td class="buyer-dashboard-right-border">D 235A...</td>
-                  <td class="buyer-dashboard-right-border">Seoily</td>
-               </tr>
-               <tr class="buyer-dashboard-recent-activity-table-outer">
-                  <td class="buyer-dashboard-right-border">04</td>
-                  <td class="buyer-dashboard-right-border">John</td>
-                  <td class="buyer-dashboard-right-border">abc@gmail.com</td>
-                  <td class="buyer-dashboard-right-border">9876543210</td>
-                  <td class="buyer-dashboard-right-border">22AAAAA0000A1Z5</td>
-                  <td class="buyer-dashboard-right-border">ABCTY1234D</td>
-                  <td class="buyer-dashboard-right-border">D 235A...</td>
-                  <td class="buyer-dashboard-right-border">Seoily</td>
-               </tr>
+               @endforeach
             </tbody>
          </table>
       </div>

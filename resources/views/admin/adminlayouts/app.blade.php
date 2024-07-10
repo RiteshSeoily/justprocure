@@ -29,6 +29,8 @@
     <!-- jQuery and DataTables -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
 </head>
 
 <body data-spy="scroll">
@@ -113,6 +115,66 @@
             });
         }
     </script>
+    <script>
+   $(document).ready(function() {
+       $('#dataTable').DataTable();
+   });
+</script>
+<script>
+    $(document).ready(function() {
+        function downloadCSV(csv, filename) {
+            var csvFile;
+            var downloadLink;
+
+            // CSV file
+            csvFile = new Blob([csv], { type: 'text/csv' });
+
+            // Download link
+            downloadLink = document.createElement('a');
+
+            // File name
+            downloadLink.download = filename;
+
+            // Create a link to the file
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+
+            // Hide download link
+            downloadLink.style.display = 'none';
+
+            // Add the link to DOM
+            document.body.appendChild(downloadLink);
+
+            // Click download link
+            downloadLink.click();
+        }
+
+        function exportTableToCSV(filename) {
+            var data = [];
+            var rows = document.querySelectorAll('table#dataTable tr');
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll('td, th');
+
+                for (var j = 0; j < cols.length; j++) {
+                    row.push(cols[j].innerText);
+                }
+
+                data.push(row.join(","));
+            }
+
+            // Create a CSV string from the data array
+            var csv = data.join("\n");
+
+            // Download CSV
+            downloadCSV(csv, filename);
+        }
+
+        // Event listener for the Export button
+        document.querySelector(".back-button-for-rfq-buyer").addEventListener("click", function() {
+            exportTableToCSV('table_data.csv');
+        });
+    });
+</script>
 
 </body>
 

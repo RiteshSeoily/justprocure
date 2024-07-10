@@ -41,7 +41,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('buyers-count', [BuyerController::class, 'count'])->name('admin.buyers.count');
     Route::get('all-buyers', [BuyerController::class, 'allBuyersdata'])->name('admin.buyers.all');
 
-    
+    Route::get('/rfq-count', [BuyerController::class, 'rfqcount'])->name('admin.allrfqs');
     Route::get('/all-gst/{id}', [BuyerController::class, 'getAddressByUserId'])->name('admin.addresses.byUserId');
     Route::get('/buyer-rfq-count/{buyerId}', [BuyerController::class, 'rfqcountByBuyerId'])->name('admin.rfq.count');
     Route::get('/buyer-all-rfq/{buyerId}', [BuyerController::class, 'allRfq'])->name('admin.rfq.list');
@@ -49,6 +49,11 @@ Route::middleware('admin.auth')->group(function () {
 
     Route::get('all-sellers', [SellerController::class, 'allBuyersdata'])->name('admin.sellers.all');
     Route::delete('sellers/{id}', [SellerController::class, 'destroy'])->name('admin.sellers.destroy');
+    Route::get('sellers-count', [SellerController::class, 'count'])->name('admin.sellers.count');
+    Route::get('/single-seller/{id}', [SellerController::class, 'findSellerById'])->name('admin.sellers.single-seller');
+    Route::get('/sellers/{id}/edit', [SellerController::class, 'edit'])->name('admin.sellers.edit');
+
+    Route::put('/sellers/{id}', [SellerController::class, 'update'])->name('admin.sellers.update');
 
 
 });
@@ -71,5 +76,5 @@ Route::post('/logout', 'Auth\LogoutController@logout')->name('logout');
 
 
 Route::get("test",function(){
-    return view('admin.test');
+    return view('admin.seller-edit');
 });

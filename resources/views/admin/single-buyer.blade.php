@@ -108,51 +108,51 @@
             <button class="searchbar-icon-admin-dashboard" type="submit"><i class="fa fa-search"></i></button>
          </form>
       </div>
-      <button class="back-button-for-rfq-buyer" onclick="" tabindex="-1" aria-disabled="true">
-      Export
-      </button>
+      <button class="back-button-for-rfq-buyer" tabindex="-1" aria-disabled="true">
+    Export
+</button>
       <button class="back-button-for-rfq-buyer" onclick="" tabindex="-1" aria-disabled="true">
       <span class="fa fa-arrow-left"></span> BACK
       </button>
    </div>
    <div class="dashboard_product_list account_user_deails">
-      <div class="order_table table-responsive">
-         <table class="table" id="dataTable">
+    <div class="order_table table-responsive">
+        <table class="table" id="dataTable">
             <thead>
-               <tr>
-                  <th scope="col" class="heading-buyer-dashboard-recent-activity">S. No.</th>
-                  <th scope="col" class="heading-buyer-dashboard-recent-activity">NAME</th>
-                  <th scope="col" class="heading-buyer-dashboard-recent-activity">EMAIL</th>
-                  <th scope="col" class="heading-buyer-dashboard-recent-activity">PHONE NUMBER</th>
-                  <th scope="col" class="heading-buyer-dashboard-recent-activity">GST</th>
-                  <th scope="col" class="heading-buyer-dashboard-recent-activity">PAN</th>
-                  <th scope="col" class="heading-buyer-dashboard-recent-activity">ADDRESS</th>
-                  <th scope="col" class="heading-buyer-dashboard-recent-activity">STATE</th>
-                  <th scope="col" class="heading-buyer-dashboard-recent-activity">RFQ</th>
-                  <th scope="col" class="heading-buyer-dashboard-recent-activity">ORDER</th>
-                  <th scope="col" class="heading-buyer-dashboard-recent-activity">VALUE</th>
-               </tr>
+                <tr>
+                    <th scope="col" class="heading-buyer-dashboard-recent-activity">S. No.</th>
+                    <th scope="col" class="heading-buyer-dashboard-recent-activity">NAME</th>
+                    <th scope="col" class="heading-buyer-dashboard-recent-activity">EMAIL</th>
+                    <th scope="col" class="heading-buyer-dashboard-recent-activity">PHONE NUMBER</th>
+                    <th scope="col" class="heading-buyer-dashboard-recent-activity">GST</th>
+                    <th scope="col" class="heading-buyer-dashboard-recent-activity">PAN</th>
+                    <th scope="col" class="heading-buyer-dashboard-recent-activity">ADDRESS</th>
+                    <th scope="col" class="heading-buyer-dashboard-recent-activity">STATE</th>
+                    <th scope="col" class="heading-buyer-dashboard-recent-activity">RFQ</th>
+                    <th scope="col" class="heading-buyer-dashboard-recent-activity">ORDER</th>
+                    <th scope="col" class="heading-buyer-dashboard-recent-activity">VALUE</th>
+                </tr>
             </thead>
             <tbody>
-               @foreach($addresses as $index => $address)
-               <tr class="buyer-dashboard-recent-activity-table-outer" data-gst="{{ $index + 1 }}">
-                  <td class="buyer-dashboard-right-border">{{ $index + 1 }}</td>
-                  <td class="buyer-dashboard-right-border">{{ $address->contact_name }}</td>
-                  <td class="buyer-dashboard-right-border">{{ $address->buyer->email }}</td>
-                  <td class="buyer-dashboard-right-border">{{ $address->buyer->phone_number }}</td>
-                  <td class="buyer-dashboard-right-border">{{ $address->gst_number }}</td>
-                  <td class="buyer-dashboard-right-border">{{ $address->pan_number }}</td>
-                  <td class="buyer-dashboard-right-border">{{ $address->location }}</td>
-                  <td class="buyer-dashboard-right-border">{{ $address->state }}</td>
-                  <td class="buyer-dashboard-right-border">{{ $address->rfq_status }}</td>
-                  <td class="buyer-dashboard-right-border">{{ $address->order }}</td>
-                  <td class="buyer-dashboard-right-border">{{ $address->value }}</td>
-               </tr>
-               @endforeach
+                @foreach($addresses as $index => $address)
+                <tr class="buyer-dashboard-recent-activity-table-outer" data-gst="{{ $index + 1 }}">
+                    <td class="buyer-dashboard-right-border">{{ $index + 1 }}</td>
+                    <td class="buyer-dashboard-right-border">{{ $address->contact_name }}</td>
+                    <td class="buyer-dashboard-right-border">{{ $address->buyer->email }}</td>
+                    <td class="buyer-dashboard-right-border">{{ $address->buyer->phone_number }}</td>
+                    <td class="buyer-dashboard-right-border">{{ $address->gst_number }}</td>
+                    <td class="buyer-dashboard-right-border">{{ $address->pan_number }}</td>
+                    <td class="buyer-dashboard-right-border">{{ $address->location }}</td>
+                    <td class="buyer-dashboard-right-border">{{ $address->state }}</td>
+                    <td class="buyer-dashboard-right-border">{{ $address->rfq_status }}</td>
+                    <td class="buyer-dashboard-right-border">{{ $address->order }}</td>
+                    <td class="buyer-dashboard-right-border">{{ $address->value }}</td>
+                </tr>
+                @endforeach
             </tbody>
-         </table>
-      </div>
-   </div>
+        </table>
+    </div>
+</div>
    <div class="row buyerdashboard-overview-page-rfq-box-webview">
       <div class="col-lg-12">
          <div class="buyer-dashboard-icon-section" style="margin-bottom: 30px;">
@@ -955,4 +955,60 @@
        fetchRFQs(buyerId);
    });
 </script>
+<script>
+    $(document).ready(function() {
+        function downloadCSV(csv, filename) {
+            var csvFile;
+            var downloadLink;
+
+            // CSV file
+            csvFile = new Blob([csv], { type: 'text/csv' });
+
+            // Download link
+            downloadLink = document.createElement('a');
+
+            // File name
+            downloadLink.download = filename;
+
+            // Create a link to the file
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+
+            // Hide download link
+            downloadLink.style.display = 'none';
+
+            // Add the link to DOM
+            document.body.appendChild(downloadLink);
+
+            // Click download link
+            downloadLink.click();
+        }
+
+        function exportTableToCSV(filename) {
+            var data = [];
+            var rows = document.querySelectorAll('table#dataTable tr');
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll('td, th');
+
+                for (var j = 0; j < cols.length; j++) {
+                    row.push(cols[j].innerText);
+                }
+
+                data.push(row.join(","));
+            }
+
+            // Create a CSV string from the data array
+            var csv = data.join("\n");
+
+            // Download CSV
+            downloadCSV(csv, filename);
+        }
+
+        // Event listener for the Export button
+        document.querySelector(".back-button-for-rfq-buyer").addEventListener("click", function() {
+            exportTableToCSV('table_data.csv');
+        });
+    });
+</script>
+
 @endsection

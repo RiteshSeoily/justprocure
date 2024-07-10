@@ -36,7 +36,7 @@ class BuyerController extends Controller
 
         $buyer->update($validatedData);
 
-        return redirect()->route('admin.buyers.show', $buyer->id)
+        return redirect()->route('admin.buyers.all', $buyer->id)
             ->with('success', 'Buyer updated successfully.');
     }
 
@@ -75,6 +75,13 @@ class BuyerController extends Controller
     public function rfqcountByBuyerId($buyerId)
     {
         $count = ListRfq::where('buyer_id', $buyerId)->count();
+        return response()->json(['count' => $count]);
+    }
+
+    public function rfqcount()
+    {
+        $count = ListRfq::count();
+
         return response()->json(['count' => $count]);
     }
 

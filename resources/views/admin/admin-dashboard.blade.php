@@ -116,7 +116,7 @@
                  </div>
                  <div class="buyer-dashboard-icon-heading">
                    <h5>Total Sellers</h5>
-                   <h2>0</h2>
+                   <h2 id="total-sellers">Loading..</h2>
                  </div>
                </div>
 
@@ -126,7 +126,7 @@
                  </div>
                  <div class="buyer-dashboard-icon-heading">
                    <h5>Total RFQ</h5>
-                   <h2>0</h2>
+                   <h2 id="total-rfq">Loadnig...</h2>
                  </div>
                </div>
 
@@ -516,6 +516,36 @@ for (i = 0; i < dropdown.length; i++) {
             dataType: "json",
             success: function(response) {
                 $('#total-buyers').text(response.count);
+            },
+            error: function(error) {
+                console.log("Error fetching buyer count:", error);
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "{{ route('admin.sellers.count') }}",
+            method: "GET",
+            dataType: "json",
+            success: function(response) {
+                $('#total-sellers').text(response.count);
+            },
+            error: function(error) {
+                console.log("Error fetching buyer count:", error);
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "{{ route('admin.allrfqs') }}",
+            method: "GET",
+            dataType: "json",
+            success: function(response) {
+                $('#total-rfq').text(response.count);
             },
             error: function(error) {
                 console.log("Error fetching buyer count:", error);

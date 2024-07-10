@@ -100,10 +100,10 @@
                                  <td class="editing_list align-middle">
                                     <ul>
                                        <li class="list-inline-item mb-1">
-                                          <a href="{{ route('admin.addresses.byUserId', ['id' => $seller->id]) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="View" aria-label="View"><i class="fa fa-eye"></i></a>
+                                          <a href="{{ route('admin.sellers.single-seller', ['id' => $seller->id]) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="View" aria-label="View"><i class="fa fa-eye"></i></a>
                                        </li>
                                        <li class="list-inline-item mb-1">
-                                          <a href="{{ route('admin.buyers.edit', ['id' => $seller->id]) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
+                                          <a href="{{ route('admin.sellers.edit', ['id' => $seller->id]) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
                                        </li>
                                        <li class="list-inline-item mb-1">
                                           <button class="delete-buyer-btn" data-id="{{ $seller->id }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" aria-label="Delete" style="border:none;background:none;"><i class="fa fa-trash" aria-hidden="true"></i></button>
