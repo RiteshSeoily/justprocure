@@ -60,6 +60,7 @@
     <script src="{{ asset('js/range-slider.js') }}"></script>
     <script src="{{ asset('js/dashboard-script.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/SingleSellerRfq.js') }}"></script>
 
     <!-- Additional JS libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

@@ -1,8 +1,6 @@
 @extends('admin.adminlayouts.app')
 @section('title', 'All RFQs for Buyer')
 @section('content')
-
-
 <div class="dashboard_content_wrapper">
 <div class="dashboard dashboard_wrapper pr0-md">
 <div class="dashboard__sidebar">
@@ -91,9 +89,7 @@
 <div class="col-xl-12">
    <div class="admin-dashboard-searchbar-radio-button-outer">
       <div class="radio-button-admin-dashboard-outer">
-        
       </div>
-      
       <button class="back-button-for-rfq-buyer" onclick="" tabindex="-1" aria-disabled="true"> 
       Export
       </button>
@@ -119,7 +115,7 @@
                </tr>
             </thead>
             <tbody>
-            @foreach($sellers as $index => $seller)
+               @foreach($sellers as $index => $seller)
                <tr class="buyer-dashboard-recent-activity-table-outer">
                   <td class="buyer-dashboard-right-border">{{ $index+1 }}</td>
                   <td class="buyer-dashboard-right-border">{{ $seller->name}}</td>
@@ -145,7 +141,7 @@
                   </div>
                   <div class="buyer-dashboard-icon-heading">
                      <h5>Total RFQ</h5>
-                     <h2>0</h2>
+                     <h2 id="totalRfqCount">0</h2>
                   </div>
                </div>
             </div>
@@ -265,83 +261,8 @@
                         <th scope="col" class="heading-buyer-dashboard-recent-activity">Action</th>
                      </tr>
                   </thead>
-                  <tbody>
-                     <tr class="buyer-dashboard-recent-activity-table-outer">
-                        <td class="buyer-dashboard-right-border">01</td>
-                        <td class="buyer-dashboard-right-border">RFQ777777</td>
-                        <td class="buyer-dashboard-right-border">28-06-2024</td>
-                        <td class="buyer-dashboard-right-border">0</td>
-                        <td class="editing_list align-middle">
-                           <ul>
-                              <li class="list-inline-item mb-1">
-                                 <a href="rfqs-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
-                              </li>
-                              <li class="list-inline-item mb-1">
-                                 <a href="buyer-rfqs-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
-                              </li>
-                              <li class="list-inline-item mb-1">
-                                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="History" data-bs-original-title="History" aria-label="History"><i class="fa fa-history" aria-hidden="true"></i></a>
-                              </li>
-                           </ul>
-                        </td>
-                     </tr>
-                     <tr class="buyer-dashboard-recent-activity-table-outer">
-                        <td class="buyer-dashboard-right-border">02</td>
-                        <td class="buyer-dashboard-right-border">RFQ777777</td>
-                        <td class="buyer-dashboard-right-border">28-06-2024</td>
-                        <td class="buyer-dashboard-right-border">0</td>
-                        <td class="editing_list align-middle">
-                           <ul>
-                              <li class="list-inline-item mb-1">
-                                 <a href="rfqs-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
-                              </li>
-                              <li class="list-inline-item mb-1">
-                                 <a href="buyer-rfqs-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
-                              </li>
-                              <li class="list-inline-item mb-1">
-                                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="History" data-bs-original-title="History" aria-label="History"><i class="fa fa-history" aria-hidden="true"></i></a>
-                              </li>
-                           </ul>
-                        </td>
-                     </tr>
-                     <tr class="buyer-dashboard-recent-activity-table-outer">
-                        <td class="buyer-dashboard-right-border">03</td>
-                        <td class="buyer-dashboard-right-border">RFQ777777</td>
-                        <td class="buyer-dashboard-right-border">28-06-2024</td>
-                        <td class="buyer-dashboard-right-border">0</td>
-                        <td class="editing_list align-middle">
-                           <ul>
-                              <li class="list-inline-item mb-1">
-                                 <a href="rfqs-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
-                              </li>
-                              <li class="list-inline-item mb-1">
-                                 <a href="buyer-rfqs-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
-                              </li>
-                              <li class="list-inline-item mb-1">
-                                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="History" data-bs-original-title="History" aria-label="History"><i class="fa fa-history" aria-hidden="true"></i></a>
-                              </li>
-                           </ul>
-                        </td>
-                     </tr>
-                     <tr class="buyer-dashboard-recent-activity-table-outer">
-                        <td class="buyer-dashboard-right-border">04</td>
-                        <td class="buyer-dashboard-right-border">RFQ777777</td>
-                        <td class="buyer-dashboard-right-border">28-06-2024</td>
-                        <td class="buyer-dashboard-right-border">0</td>
-                        <td class="editing_list align-middle">
-                           <ul>
-                              <li class="list-inline-item mb-1">
-                                 <a href="rfqs-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
-                              </li>
-                              <li class="list-inline-item mb-1">
-                                 <a href="buyer-rfqs-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
-                              </li>
-                              <li class="list-inline-item mb-1">
-                                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="History" data-bs-original-title="History" aria-label="History"><i class="fa fa-history" aria-hidden="true"></i></a>
-                              </li>
-                           </ul>
-                        </td>
-                     </tr>
+                  <tbody id="rfqTableBody">
+                     <!-- Data will be populated here via AJAX -->
                   </tbody>
                </table>
             </div>
@@ -754,42 +675,6 @@
                            </ul>
                         </td>
                      </tr>
-                     <tr class="buyer-dashboard-recent-activity-table-outer">
-                        <td class="buyer-dashboard-right-border">02</td>
-                        <td class="buyer-dashboard-right-border">ID77777</td>
-                        <td class="buyer-dashboard-right-border">100000</td>
-                        <td class="editing_list align-middle">
-                           <ul>
-                              <li class="list-inline-item mb-1">
-                                 <a href="all-buyer-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
-                              </li>
-                           </ul>
-                        </td>
-                     </tr>
-                     <tr class="buyer-dashboard-recent-activity-table-outer">
-                        <td class="buyer-dashboard-right-border">03</td>
-                        <td class="buyer-dashboard-right-border">ID77777</td>
-                        <td class="buyer-dashboard-right-border">100000</td>
-                        <td class="editing_list align-middle">
-                           <ul>
-                              <li class="list-inline-item mb-1">
-                                 <a href="all-buyer-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
-                              </li>
-                           </ul>
-                        </td>
-                     </tr>
-                     <tr class="buyer-dashboard-recent-activity-table-outer">
-                        <td class="buyer-dashboard-right-border">04</td>
-                        <td class="buyer-dashboard-right-border">ID77777</td>
-                        <td class="buyer-dashboard-right-border">100000</td>
-                        <td class="editing_list align-middle">
-                           <ul>
-                              <li class="list-inline-item mb-1">
-                                 <a href="all-buyer-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
-                              </li>
-                           </ul>
-                        </td>
-                     </tr>
                   </tbody>
                </table>
             </div>
@@ -962,7 +847,7 @@
    </div>
    <!--invoice-table-end-->    
 </div>
-<script>
+<!-- <script>
    function openCity(evt, cityName) {
      var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontent");
@@ -978,7 +863,8 @@
        }
       // Get the element with id="defaultOpen" and click on it
      document.getElementById("defaultOpen").click();
-</script>
+   </script> -->
 <!--tablinks for our work section end -->
+
 
 @endsection

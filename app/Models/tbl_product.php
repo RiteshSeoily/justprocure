@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TblProduct extends Model
+class tbl_product extends Model
 {
     use HasFactory;
 
-    protected $table = 'tbl_products';
+    protected $table = 'tbl_products'; // Specify the table name explicitly if different from the model name convention
 
     protected $fillable = [
         'buyer_id',
@@ -32,21 +32,15 @@ class TblProduct extends Model
         'meta_title',
         'meta_keyword',
         'meta_description',
+        // 'created_at' and 'updated_at' are automatically managed by Eloquent
     ];
 
-    /**
-     * Get the buyer that owns the product.
-     */
+    // Define relationships if applicable
+
     public function buyer()
     {
         return $this->belongsTo(Buyer::class, 'buyer_id');
     }
-    
-    /**
-     * Get the RFQs associated with the product.
-     */
-    public function sellerRfq()
-    {
-        return $this->hasMany(SellerRfq::class, 'product_id');
-    }
+
+    // Define other relationships as needed
 }

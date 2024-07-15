@@ -21,5 +21,9 @@ class ListRfq extends Model
         'delete_count',
         'is_modified'
     ];
+    public function sellerRfq()
+    {
+        return $this->belongsTo(SellerRfq::class, 'rfq_id', 'rfq_id');
+    }
  
 }

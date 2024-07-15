@@ -52,9 +52,11 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('sellers-count', [SellerController::class, 'count'])->name('admin.sellers.count');
     Route::get('/single-seller/{id}', [SellerController::class, 'findSellerById'])->name('admin.sellers.single-seller');
     Route::get('/sellers/{id}/edit', [SellerController::class, 'edit'])->name('admin.sellers.edit');
-
     Route::put('/sellers/{id}', [SellerController::class, 'update'])->name('admin.sellers.update');
-
+    Route::get('/seller/{id}/rfq-count', [SellerController::class, 'getSingleSellerRfqCount'])->name('admin.seller.rfq.count');
+    Route::get('/seller/{id}/rfq-data', [SellerController::class, 'getSingleSellerRfqData'])->name('admin.seller.rfq.data');
+    Route::get('/singlerfqview/{id}', [SellerController::class, 'singleselllerrfq'])->name('admin.single-seller-rfq');
+    Route::get('/singlerfqedit/{id}', [SellerController::class, 'singleselllerrfqedit'])->name('admin.single-seller-edit');
 
 });
 
