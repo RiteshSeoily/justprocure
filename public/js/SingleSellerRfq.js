@@ -11,11 +11,12 @@ function fetchRfqs(sellerId) {
              tableBody.empty();
 
              rfqs.forEach((rfq, index) => {
+               let date = rfq.Date ? rfq.Date : '';
                 tableBody.append(`
                    <tr class="buyer-dashboard-recent-activity-table-outer">
                       <td  class="buyer-dashboard-right-border">${index + 1}</td>
                       <td  class="buyer-dashboard-right-border">${rfq.rfq_number}</td>
-                      <td  class="buyer-dashboard-right-border">${rfq.created_at}</td>
+                      <td  class="buyer-dashboard-right-border">${date}</td>
                       <td  class="buyer-dashboard-right-border">${rfq.product_count}</td>
                       <td class="editing_list align-middle">
                        <ul>
@@ -27,7 +28,7 @@ function fetchRfqs(sellerId) {
 
 
                           <li class="list-inline-item mb-1">
-                            <a href="/singlerfqedit/${rfq.rfq_id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
+                            <a href="/single-seller-rfq-edit/${rfq.rfq_id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
                           </li>
                           <li class="list-inline-item mb-1">
                             <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="History" data-bs-original-title="History" aria-label="History"><i class="fa fa-history" aria-hidden="true"></i></a>

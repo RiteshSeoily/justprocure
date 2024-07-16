@@ -7,6 +7,11 @@ use App\Http\Controllers\SellerRegistrationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Commission;
+use App\Http\Controllers\invoice;
+
+
 
 // admin registration
 Route::prefix('admin')->group(function () {
@@ -34,7 +39,7 @@ Route::middleware('admin.auth')->group(function () {
     })->name('admin.home');
     
    
-    
+    // admin-buyer section 
     Route::get('buyers/{id}/edit', [BuyerController::class, 'edit'])->name('admin.buyers.edit');
     Route::put('buyers/{id}', [BuyerController::class, 'update'])->name('admin.buyers.update');
     Route::delete('buyers/{id}', [BuyerController::class, 'destroy'])->name('admin.buyers.destroy');
@@ -47,6 +52,8 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/buyer-all-rfq/{buyerId}', [BuyerController::class, 'allRfq'])->name('admin.rfq.list');
     
 
+
+    //admin seller section
     Route::get('all-sellers', [SellerController::class, 'allBuyersdata'])->name('admin.sellers.all');
     Route::delete('sellers/{id}', [SellerController::class, 'destroy'])->name('admin.sellers.destroy');
     Route::get('sellers-count', [SellerController::class, 'count'])->name('admin.sellers.count');
@@ -56,7 +63,21 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/seller/{id}/rfq-count', [SellerController::class, 'getSingleSellerRfqCount'])->name('admin.seller.rfq.count');
     Route::get('/seller/{id}/rfq-data', [SellerController::class, 'getSingleSellerRfqData'])->name('admin.seller.rfq.data');
     Route::get('/singlerfqview/{id}', [SellerController::class, 'singleselllerrfq'])->name('admin.single-seller-rfq');
-    Route::get('/singlerfqedit/{id}', [SellerController::class, 'singleselllerrfqedit'])->name('admin.single-seller-edit');
+
+
+
+    //admin Product Section
+    Route::get('/all-products', [ProductController::class, 'allproducts'])->name('products.allproducts');
+    
+    
+    //commission Controller Section
+    Route::get('/commission', [Commission::class, 'showCommission'])->name('admin.commission');
+    
+    
+    //invoice Controller section
+    Route::get('/invoice', [Invoice::class, 'showInvoice'])->name('admin.invoice');
+
+
 
 });
 

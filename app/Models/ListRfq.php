@@ -25,5 +25,9 @@ class ListRfq extends Model
     {
         return $this->belongsTo(SellerRfq::class, 'rfq_id', 'rfq_id');
     }
+    public function product()
+    {
+        return $this->belongsTo(tbl_product::class, 'product_id');
+    }
  
 }

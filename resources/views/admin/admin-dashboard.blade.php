@@ -51,10 +51,10 @@
          <a href="#">Link 3</a> -->
         </div>
           <div class="sidebar_list_item ">
-            <a href="#" class="items-center"><i class="fa fa-box mr15"></i>Commission</a>
+            <a href="{{ route('admin.commission')}}" class="items-center"><i class="fa fa-box mr15"></i>Commission</a>
           </div>
           <div class="sidebar_list_item ">
-            <a href="#" class="items-center"><i class="fa fa-box mr15"></i>PO & Invoices List</a>
+            <a href="{{ route('admin.invoice')}}" class="items-center"><i class="fa fa-box mr15"></i>PO & Invoices List</a>
           </div>
           <div class="sidebar_list_item ">
             <a href="#" class="items-center"><i class="fa fa-bell mr15"></i>Notification</a>
@@ -62,21 +62,6 @@
           <div class="sidebar_list_item ">
             <a href="#" class="items-center"><i class="fa fa-cog mr15"></i>Settings</a>
           </div> 
-      <!--<div class="sidebar_list_item ">
-            <a href="buyer-wishlist" class="items-center"><i class="fa fa-heart mr15"></i>Wishlist</a>
-          </div>
-          <div class="sidebar_list_item ">
-            <a href="buyer-savings" class="items-center"><i class="fa fa-piggy-bank animated-icon mr15"></i>Savings</a>
-          </div>
-          <div class="sidebar_list_item ">
-            <a href="buyer-saved-addresses" class="items-center"><i class="fa fa-map-marker-alt mr15"></i>Saved Addresses</a>
-          </div>
-          <div class="sidebar_list_item ">
-            <a href="buyer-notifications" class="items-center"><i class="fa fa-bell mr15"></i>Notification</a>
-          </div>
-          <div class="sidebar_list_item ">
-            <a href="buyer-settings" class="items-center"><i class="fa fa-cog mr15"></i>Settings</a>
-          </div>-->
 
           <div class="chat-with-us-buyer-dashboard">
             <div class="chat-with-us-buyer-dashboard-image">
