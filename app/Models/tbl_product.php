@@ -45,6 +45,10 @@ class tbl_product extends Model
     {
         return $this->hasMany(SellerRfq::class, 'product_id');
     }
+    public function details()
+    {
+        return $this->hasMany(tbl_product_detail::class, 'product_id');
+    }
 
     // Define other relationships as needed
 }

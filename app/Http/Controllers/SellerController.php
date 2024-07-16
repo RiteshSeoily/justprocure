@@ -85,41 +85,6 @@ class SellerController extends Controller
     }
 
 
-    // public function getSingleSellerRfq($id)
-    // {
-    //     $rfqs = SellerRfq::where('seller_id', $id)
-    //                      ->with('rfq') 
-    //                      ->get();
-    
-    //     $rfqData = $rfqs->map(function ($rfq) {
-    //         // Convert comma-separated string fields to arrays of integers and count them
-    //         $typeAIds = array_map('intval', explode(',', $rfq->rfq->type_a_ids));
-    //         $typeBIds = array_map('intval', explode(',', $rfq->rfq->type_b_ids));
-    //         $typeCIds = array_map('intval', explode(',', $rfq->rfq->type_c_ids));
-    
-    //         // Combine all counts into a single total count
-    //         $totalCount = count($typeAIds) + count($typeBIds) + count($typeCIds);
-    
-    //         return [
-    //             'rfq_id' => $rfq->rfq_id,
-    //             'rfq_number' => optional($rfq->rfq)->rfq_number,
-    //             'product_count' => $totalCount,
-              
-    //         ];
-    //     });
-    
-    //     if ($rfqData->isNotEmpty()) {
-    //         return response()->json([
-    //             'success' => true,
-    //             'data' => $rfqData
-    //         ], 200);
-    //     } else {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'No RFQs found for this seller'
-    //         ], 404);
-    //     }
-    // }
 
 
     public function getSingleSellerRfqCount($id)

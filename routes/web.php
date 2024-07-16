@@ -68,8 +68,11 @@ Route::middleware('admin.auth')->group(function () {
 
     //admin Product Section
     Route::get('/all-products', [ProductController::class, 'allproducts'])->name('products.allproducts');
-    
-    
+    Route::get('/products/show/{id}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
     //commission Controller Section
     Route::get('/commission', [Commission::class, 'showCommission'])->name('admin.commission');
     

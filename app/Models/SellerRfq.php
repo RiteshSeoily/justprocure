@@ -24,10 +24,6 @@ class SellerRfq extends Model
     {
         return $this->belongsTo(ListRfq::class, 'rfq_id');
     }
-
-    /**
-     * Get the product associated with the SellerRfq
-     */
     public function product()
     {
         return $this->belongsTo(TblProduct::class, 'product_id');
