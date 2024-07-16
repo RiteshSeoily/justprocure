@@ -60,7 +60,7 @@ class ProductController extends Controller
         $product_detail->tbl_status = $request->status;
         $product_detail->save();
 
-        return redirect()->route('products.edit', $product->id)->with('success', 'Product details updated successfully.');
+        return redirect()->route('products.allproducts')->with('success', 'Product details updated successfully.');
     }
 
       
