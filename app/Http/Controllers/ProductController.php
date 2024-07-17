@@ -82,12 +82,6 @@ class ProductController extends Controller
     
         // Redirect back with success message
         return redirect()->route('products.allproducts')->with('success', 'Product details updated successfully.');
-    }
-    
-    
-    
-
-      
-    
+    } 
    
 }

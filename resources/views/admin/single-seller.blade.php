@@ -41,7 +41,7 @@
          <a href="#">- Category Lable2</a><br>
          <a href="#">- Category Lable3</a><br>
          <a href="#">- All Brands</a><br>
-         <a href="#">- All Products</a>
+         <a href="{{ route('products.allproducts')}}">- All Products</a>
          <!-- <a href="#">Link 2</a>
             <a href="#">Link 3</a> -->
       </div>
