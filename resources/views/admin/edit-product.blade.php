@@ -1,47 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Product</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <h2>Edit Product</h2>
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+@extends('admin.adminlayouts.app')
+
+@section('title', 'Edit Product')
+
+@section('content')
+<div class="dashboard_content_wrapper">
+    <div class="dashboard dashboard_wrapper pr0-md">
+        <div class="dashboard__main pl0-md">
+            <div class="dashboard__content bg-color-buyer-dashboard">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Edit Product</h3>
+                            </div>
+                            <div class="card-body">
+                                <form action="{{ route('products.update', $product_detail->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    
+                                    <div class="form-group">
+                                        <label for="product_name" class="form-label">Product Name</label>
+                                        <input type="text" id="product_name" name="product_name" class="form-control" value="{{ old('product_name', $product->product_name) }}" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="tbl_selling_price" class="form-label">Selling Price</label>
+                                        <input type="text" id="tbl_selling_price" name="tbl_selling_price" class="form-control" value="{{ old('tbl_selling_price', $product_detail->tbl_selling_price) }}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="tbl_mrp" class="form-label">MRP</label>
+                                        <input type="text" id="tbl_mrp" name="tbl_mrp" class="form-control" value="{{ old('tbl_mrp', $product_detail->tbl_mrp) }}" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="status" class="form-label">Status</label>
+                                        <input type="text" id="status" name="status" class="form-control" value="{{ old('status', $product_detail->status) }}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Update Product</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        @endif
-
-        <form action="{{ route('products.update', $product->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-
-            <div class="form-group">
-                <label for="product_name">Product Name</label>
-                <input type="text" class="form-control" id="product_name" name="product_name" value="{{ $product->product_name }}">
-            </div>
-
-            <div class="form-group">
-                <label for="tbl_selling_price">Selling Price</label>
-                <input type="text" class="form-control" id="tbl_selling_price" name="tbl_selling_price" value="{{ $product_detail->tbl_selling_price }}">
-            </div>
-
-            <div class="form-group">
-                <label for="tbl_status">Status</label>
-                <input type="text" class="form-control" id="tbl_status" name="tbl_status" value="{{ $product_detail->tbl_status }}">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Update Product</button>
-        </form>
+        </div>
     </div>
-
-    <!-- Bootstrap JS and dependencies (jQuery) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+@endsection

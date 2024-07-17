@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\tbl_product; //
+use App\Models\tbl_product;
 use App\Models\tbl_product_detail; 
 
 class ProductController extends Controller
@@ -45,23 +45,47 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Log the request data for debugging
+        \Log::info('Request Data:', $request->all());
+    
+        // Validate the request data
         $request->validate([
             'product_name' => 'required|string|max:255',
             'tbl_selling_price' => 'required|string|max:255',
+            'tbl_mrp' => 'nullable|string|max:255',
             'status' => 'required|string|max:255'
         ]);
-
-        $product = tbl_product::findOrFail($id);
+    
+        // Retrieve product detail and log it
+        $product_detail = tbl_product_detail::findOrFail($id);
+        \Log::info('Product Detail Retrieved:', $product_detail->toArray());
+    
+        // Update product details
+        $product_detail->tbl_selling_price = $request->tbl_selling_price;
+        $product_detail->tbl_mrp = $request->tbl_mrp;
+        $product_detail->status = $request->status;
+        $product_detail->save();
+    
+        // Log the updated product detail
+        \Log::info('Updated Product Detail:', $product_detail->toArray());
+    
+        // Retrieve product using the foreign key from product detail and log it
+        $product = tbl_product::findOrFail($product_detail->product_id);
+        \Log::info('Product Retrieved:', $product->toArray());
+    
+        // Update the product
         $product->product_name = $request->product_name;
         $product->save();
-
-        $product_detail = tbl_product_detail::findOrFail($product->id);
-        $product_detail->tbl_selling_price = $request->tbl_selling_price;
-        $product_detail->tbl_status = $request->status;
-        $product_detail->save();
-
+    
+        // Log the updated product
+        \Log::info('Updated Product:', $product->toArray());
+    
+        // Redirect back with success message
         return redirect()->route('products.allproducts')->with('success', 'Product details updated successfully.');
     }
+    
+    
+    
 
       
     
