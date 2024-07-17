@@ -131,7 +131,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="list-inline-item mb-1">
-                                                        <a href="{{ route('products.edit', $product->id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" aria-label="Edit">
+                                                        <a href="{{ route('products.edit', $detail->id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" aria-label="Edit">
                                                             <i class="fa fa-pen"></i>
                                                         </a>
                                                     </li>
