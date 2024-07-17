@@ -8,6 +8,7 @@ use App\Models\ListRfq;
 use App\Models\Address;
 use App\Models\tbl_product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BuyerController extends Controller
 {
@@ -158,7 +159,66 @@ class BuyerController extends Controller
         return view('admin.buyersinglerfqview', ['rfqData' => $rfqData]);
     }
     
+    public function editSinglebuyerRfq($buyerId, $rfqId)
+    {
+        $rfq = ListRfq::where('buyer_id', $buyerId)
+                      ->where('id', $rfqId)
+                      ->first();
+        
+        if (!$rfq) {
+            return response()->json(['error' => 'No RFQ found for the given buyer ID and RFQ ID'], 404);
+        }
+        
+        $typeAIds = array_map('intval', explode(',', $rfq->type_a_ids));
+        $typeBIds = array_map('intval', explode(',', $rfq->type_b_ids));
+        $typeCIds = array_map('intval', explode(',', $rfq->type_c_ids));
+        
+        $productIds = array_unique(array_merge($typeAIds, $typeBIds, $typeCIds));
+        
+        $products = tbl_product::whereIn('id', $productIds)
+            ->pluck('product_name', 'id');
+        
+        $rfqData = [
+            'rfq_id' => $rfq->id,
+            'rfq_number' => $rfq->rfq_number,
+            'product_count' => count($productIds),
+            'product_names' => $products->toArray(),
+        ];
+        
+        return view('admin.editbuyersinglerfq', ['rfqData' => $rfqData]);
+    }
+             
+public function updateSinglebuyerRfq(Request $request, $rfqId)
+{
+    Log::info('Incoming request data', $request->all());
 
+    // Validate incoming request
+    $validatedData = $request->validate([
+        'rfq_number' => 'required|string',
+    ]);
+
+    Log::info('Validated data', $validatedData);
+
+    try {
+       
+        $rfq = ListRfq::findOrFail($rfqId);
+        $rfq->update([
+            'rfq_number' => $validatedData['rfq_number'],
+        ]);
+
+        Log::info('RFQ updated', ['rfq_id' => $rfq->id]);
+
+    } catch (\Exception $e) {
+        Log::error('Error updating RFQ', ['message' => $e->getMessage()]);
+        return redirect()->route('admin.buyers.all')
+                         ->with('error', 'An error occurred while updating the RFQ.');
+    }
+
+    return redirect()->route('admin.buyers.all')
+                     ->with('success', 'RFQ updated successfully');
+}
+    
+          
      
 
 }

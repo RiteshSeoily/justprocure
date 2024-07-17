@@ -51,7 +51,8 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/buyer-rfq-count/{buyerId}', [BuyerController::class, 'rfqcountByBuyerId'])->name('admin.rfq.count');
     Route::get('/buyer-all-rfq/{buyerId}', [BuyerController::class, 'allRfq'])->name('admin.rfq.list');
     Route::get('/singlebuyerrfqview/{buyer_id}/{id}',[BuyerController::class, 'singlebuyerRfqview'])->name('admin.single.rfq.view');
-    
+    Route::get('/editsinglebuyerrfq/{buyer_id}/{id}',[BuyerController::class, 'editSinglebuyerRfq']);
+    Route::put('/buyer-edit-rfq/{rfqId}', [BuyerController::class, 'updateSinglebuyerRfq'])->name('admin.updatebuyersinglerfq');
 
 
     //admin seller section

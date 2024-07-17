@@ -916,7 +916,7 @@
                                      <a href="/singlebuyerrfqview/${rfq.buyer_id}/${rfq.id}" data-bs-toggle="tooltip" data-bs-placement="top" title="View" aria-label="View"><i class="fa fa-eye"></i></a>
                                      </li>
                                  <li class="list-inline-item mb-1">
-                                    <a href="buyer-rfqs-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
+                                    <a href="/editsinglebuyerrfq/${rfq.buyer_id}/${rfq.id}" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
                                  </li>
                                  <li class="list-inline-item mb-1">
                                     <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="History" data-bs-original-title="History" aria-label="History"><i class="fa fa-history" aria-hidden="true"></i></a>
