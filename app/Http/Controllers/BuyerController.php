@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Buyer;
 use App\Models\ListRfq;
 use App\Models\Address;
+use App\Models\tbl_product;
 use Illuminate\Http\Request;
 
 class BuyerController extends Controller
@@ -81,7 +82,6 @@ class BuyerController extends Controller
     public function rfqcount()
     {
         $count = ListRfq::count();
-
         return response()->json(['count' => $count]);
     }
 
@@ -120,4 +120,45 @@ class BuyerController extends Controller
         $listRfqs = Cart::where('buyer_id', $buyerId)->get();
         return response()->json(['data' => $listRfqs]);
     }
+
+
+    public function singlebuyerRfqview($buyerId, $rfqId)
+    {
+        $rfqs = ListRfq::where('buyer_id', $buyerId)
+                       ->where('id', $rfqId)
+                       ->get();
+    
+        if ($rfqs->isEmpty()) {
+            return response()->json(['error' => 'No RFQs found for the given buyer ID and RFQ ID'], 404);
+        }
+    
+        $rfqData = [];
+    
+        foreach ($rfqs as $rfq) {
+
+            $typeAIds = array_map('intval', explode(',', $rfq->type_a_ids));
+            $typeBIds = array_map('intval', explode(',', $rfq->type_b_ids));
+            $typeCIds = array_map('intval', explode(',', $rfq->type_c_ids));
+
+            $productIds = array_unique(array_merge($typeAIds, $typeBIds, $typeCIds));
+    
+            $products = tbl_product::whereIn('id', $productIds)
+                ->pluck('product_name', 'id');
+
+            $rfqData[] = [
+                'rfq_id' => $rfq->rfq_id,
+                'rfq_number' => $rfq->rfq_number,
+                'product_count' => count($productIds),
+                'product_names' => $products->toArray(),
+                'seller_id' => $rfq->seller_id,
+            ];
+        }
+    
+        // return response()->json(['data' => $rfqData]);
+        return view('admin.buyersinglerfqview', ['rfqData' => $rfqData]);
+    }
+    
+
+     
+
 }

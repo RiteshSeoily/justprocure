@@ -172,7 +172,7 @@ class SellerController extends Controller
 
 
 
-    public function editRfq($id)
+    public function SingleSellereditRfq($id)
     {
         $rfqs = ListRfq::where('id', $id)->get();
     
@@ -204,7 +204,6 @@ class SellerController extends Controller
                 'rfq_number' => $rfq->rfq_number,
                 'product_count' => count($productNames),
                 'product_names' => $productNames,
-                'seller_id' => $rfq->seller_id,
             ];
         }
     

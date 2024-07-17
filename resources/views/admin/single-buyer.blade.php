@@ -93,18 +93,12 @@
             @endforeach
          </form>
       </div>
-      <div class="admin-dashboard-search-bar-outer">
-         <form class="searchbar-admin-dashboard-outer" action="">
-            <input type="text" placeholder="Search.." name="search" class="searchbar-admin-dashboard">
-            <button class="searchbar-icon-admin-dashboard" type="submit"><i class="fa fa-search"></i></button>
-         </form>
-      </div>
       <button class="back-button-for-rfq-buyer" tabindex="-1" aria-disabled="true">
     Export
 </button>
-      <button class="back-button-for-rfq-buyer" onclick="" tabindex="-1" aria-disabled="true">
+    <a href = "{{ route('admin.buyers.all')}}">  <button class="back-button-for-rfq-buyer" onclick="" tabindex="-1" aria-disabled="true">
       <span class="fa fa-arrow-left"></span> BACK
-      </button>
+      </button> </a>
    </div>
    <div class="dashboard_product_list account_user_deails">
     <div class="order_table table-responsive">
@@ -912,23 +906,23 @@
            $.each(rfqs, function(index, rfq) {
                var row = `
                    <tr class="buyer-dashboard-recent-activity-table-outer">
-                       <td class="buyer-dashboard-right-border">${index + 1}</td>
+                       <td class="buyer-dashboard-right-border">${index+1}</td>
                        <td class="buyer-dashboard-right-border">${rfq.rfq_number?? ""}</td>
                        <td class="buyer-dashboard-right-border">${rfq.created_at?? ""}</td>
                        <td class="buyer-dashboard-right-border">${rfq.type_a_ids ? rfq.type_a_ids : ''}</td>
-                       <td class="buyer-dashboard-right-border">
-                           <ul>
-                               <li class="list-inline-item mb-1">
-                                   <a href="rfqs-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
-                               </li>
-                               <li class="list-inline-item mb-1">
-                                   <a href="buyer-rfqs-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
-                               </li>
-                               <li class="list-inline-item mb-1">
-                                   <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="History" data-bs-original-title="History" aria-label="History"><i class="fa fa-history" aria-hidden="true"></i></a>
-                               </li>
-                           </ul>
-                       </td>
+                        <td class="editing_list align-middle">
+                              <ul>
+                                  <li class="list-inline-item mb-1">
+                                     <a href="/singlebuyerrfqview/${rfq.buyer_id}/${rfq.id}" data-bs-toggle="tooltip" data-bs-placement="top" title="View" aria-label="View"><i class="fa fa-eye"></i></a>
+                                     </li>
+                                 <li class="list-inline-item mb-1">
+                                    <a href="buyer-rfqs-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
+                                 </li>
+                                 <li class="list-inline-item mb-1">
+                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="History" data-bs-original-title="History" aria-label="History"><i class="fa fa-history" aria-hidden="true"></i></a>
+                                 </li>
+                              </ul>
+                           </td>
                    </tr>`;
                tableBody.append(row);
            });

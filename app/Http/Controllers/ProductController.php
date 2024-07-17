@@ -25,16 +25,16 @@ class ProductController extends Controller
     
     public function destroy($id)
     {
-           
-    try {
-        $product = tbl_product::findOrFail($id);
-        $product->delete();
-
-        return response()->json(['success' => true]);
-    } catch (\Exception $e) {
-        return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        try {
+            $product = tbl_product::findOrFail($id);
+            $product->delete();
+    
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
-    }
+    
 
     public function edit($id)
     {

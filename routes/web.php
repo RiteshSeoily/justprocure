@@ -50,6 +50,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/all-gst/{id}', [BuyerController::class, 'getAddressByUserId'])->name('admin.addresses.byUserId');
     Route::get('/buyer-rfq-count/{buyerId}', [BuyerController::class, 'rfqcountByBuyerId'])->name('admin.rfq.count');
     Route::get('/buyer-all-rfq/{buyerId}', [BuyerController::class, 'allRfq'])->name('admin.rfq.list');
+    Route::get('/singlebuyerrfqview/{buyer_id}/{id}',[BuyerController::class, 'singlebuyerRfqview'])->name('admin.single.rfq.view');
     
 
 
@@ -63,7 +64,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/seller/{id}/rfq-count', [SellerController::class, 'getSingleSellerRfqCount'])->name('admin.seller.rfq.count');
     Route::get('/seller/{id}/rfq-data', [SellerController::class, 'getSingleSellerRfqData'])->name('admin.seller.rfq.data');
     Route::get('/singlerfqview/{id}', [SellerController::class, 'singleselllerrfq'])->name('admin.single-seller-rfq');
-
+    Route::get('/SingleSelleredit/{id}', [SellerController::class, 'SingleSellereditRfq'])->name('admin.single-seller-rfq-edit');
 
 
     //admin Product Section
