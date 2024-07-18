@@ -69,7 +69,8 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/SingleSelleredit/{id}', [SellerController::class, 'SingleSellereditRfq'])->name('admin.single-seller-rfq-edit');
     Route::get('/singleSellerProductCount/{id}', [SellerController::class, 'getSingleSellerProductCount']);
     Route::get('/singleSellerProductDetail/{id}', [SellerController::class, 'getSingleSellerProductDetails']);
-    Route::delete('/seller/{sellerId}/rfq/{sellerRfqId}', [SellerController::class, 'removeSellerRfq'])->name('siseller.rfq.remove');
+    Route::get('/singleSellerProductview/{sellerId}/{sellerRfqId}', [SellerController::class, 'getSingleSellerProductView']);
+    Route::delete('/seller/{sellerId}/{sellerRfqId}', [SellerController::class, 'removeSellerRfq'])->name('siseller.rfq.remove');
     Route::post('/admin/sellers/{id}/approve', [SellerController::class, 'approveSeller'])->name('admin.sellers.approve');
 
     //admin Product Section

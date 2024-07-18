@@ -212,82 +212,104 @@ class SellerController extends Controller
         }
     }
     
-    public function getSingleSellerProductCount($id)
+    public function getSingleSellerProductCount($sellerId)
     {
-        $rfqs = SellerRfq::where('seller_id', $id)
-                         ->with('rfq') 
+        $rfqs = SellerRfq::where('seller_id', $sellerId)
+                         ->with('rfq')
                          ->get();
-    
-        $totalProductCount = 0;
-    
+
+        $uniqueProductIds = [];
+
         foreach ($rfqs as $rfq) {
-            $typeAIds = array_map('intval', explode(',', $rfq->rfq->type_a_ids));
-            $typeBIds = array_map('intval', explode(',', $rfq->rfq->type_b_ids));
-            $typeCIds = array_map('intval', explode(',', $rfq->rfq->type_c_ids));
-            $productIds = array_unique(array_merge($typeAIds, $typeBIds, $typeCIds));
-    
-            $products = tbl_product::whereIn('id', $productIds)
-                                  ->pluck('product_name', 'id');
-    
-            $productNames = [];
-            foreach ($productIds as $productId) {
-                if (isset($products[$productId])) {
-                    $productNames[] = $products[$productId];
+            if ($rfq->product_id) {
+                $product = tbl_product::find($rfq->product_id);
+
+                if ($product) {
+                    $uniqueProductIds[] = $product->id;
                 }
             }
-    
-            $totalProductCount += count($productNames);
         }
-    
+        $uniqueProductIds = array_unique($uniqueProductIds);
+        $totalProductCount = count($uniqueProductIds);
+
         return response()->json([
             'success' => true,
             'total_product_count' => $totalProductCount
         ], 200);
     }
     
-    public function getSingleSellerProductDetails($id)
+    public function getSingleSellerProductDetails($sellerId)
     {
-        $rfqs = SellerRfq::where('seller_id', $id)
+
+        $rfqs = SellerRfq::where('seller_id', $sellerId)
                          ->with('rfq')
                          ->get();
-    
+
         $productDetails = [];
-    
         foreach ($rfqs as $rfq) {
-            $typeAIds = array_map('intval', explode(',', $rfq->rfq->type_a_ids));
-            $typeBIds = array_map('intval', explode(',', $rfq->rfq->type_b_ids));
-            $typeCIds = array_map('intval', explode(',', $rfq->rfq->type_c_ids));
-            $productIds = array_unique(array_merge($typeAIds, $typeBIds, $typeCIds));
-    
-            $products = tbl_product::whereIn('id', $productIds)
-                                  ->with('details')
-                                  ->get();
-    
-            foreach ($products as $product) {
+            if ($rfq->product_id) {
+                $product = tbl_product::with('details')->find($rfq->product_id);
+
+                if ($product) {
+                    $productDetailsArray = [
+                        'sellerrfq_id' => $rfq->id, 
+                        'product_name' => $product->product_name,
+                        'tbl_image' => $product->tbl_image,
+                        'status' => $product->status,
+                    ];
+
+                    $sellingPrice = null;
+                    if ($product->details->isNotEmpty()) {
+                        $sellingPrice = $product->details->first()->tbl_selling_price;
+                    }
+
+                    $productDetailsArray['tbl_selling_price'] = $sellingPrice;
+                    $productDetails[] = $productDetailsArray;
+                }
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'product_details' => $productDetails
+        ], 200);
+    }
+
+
+    public function getSingleSellerProductView($sellerId, $sellerRfqId)
+    {
+        // Fetch the specific RFQ for the given seller ID and RFQ ID
+        $rfq = SellerRfq::where('seller_id', $sellerId)
+                        ->where('id', $sellerRfqId)
+                        ->with('rfq')
+                        ->first();
+
+        $productDetails = [];
+
+        if ($rfq && $rfq->product_id) {
+            $product = tbl_product::with('details')->find($rfq->product_id);
+
+            if ($product) {
                 $productDetailsArray = [
-                    'sellerrfq_id' => $rfq->id, 
+                    'sellerrfq_id' => $rfq->id,
                     'product_name' => $product->product_name,
                     'tbl_image' => $product->tbl_image,
                     'status' => $product->status,
                 ];
+
                 $sellingPrice = null;
-    
                 if ($product->details->isNotEmpty()) {
                     $sellingPrice = $product->details->first()->tbl_selling_price;
                 }
-    
+
                 $productDetailsArray['tbl_selling_price'] = $sellingPrice;
                 $productDetails[] = $productDetailsArray;
             }
         }
-    
-        
-            return response()->json([
-                'success' => true,
-                'product_details' => $productDetails
-            ], 200);
+
+        return view('admin.single_seller_product_view', compact('productDetails'));
     }
-    
+
     public function removeSellerRfq($sellerId, $sellerRfqId)
     {
         // Find the SellerRfq entry by seller_id and id
@@ -320,15 +342,10 @@ class SellerController extends Controller
 
     public function approveSeller(Request $request, $id)
     {
-        // Find the seller by ID
         $seller = Seller::find($id);
-        
-        // Check if seller exists
         if (!$seller) {
             return response()->json(['success' => false, 'message' => 'Seller not found'], 404);
         }
-    
-        // Update seller's approval status
         try {
             $seller->approve = $request->input('approve');
             $seller->save();
