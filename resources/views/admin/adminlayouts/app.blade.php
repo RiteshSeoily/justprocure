@@ -177,6 +177,41 @@
     });
 </script>
 
+
+ <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: '/categories',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        let categories = response.categories;
+                        let dropdown = $('.productdrop');
+
+                        // Clear existing content
+                        dropdown.empty();
+
+                        // Append categories to the dropdown
+                        categories.forEach(category => {
+                            dropdown.append(`<a href="all-buyer">- ${category.category_name}</a><br>`);
+                        });
+
+                        // Append static links
+                        dropdown.append(`
+                            <a href="{{ route('admin.seller.brand') }}">- All Brands</a><br>
+                            <a href="{{ route('products.allproducts') }}">- All Products</a>
+                        `);
+                    } else {
+                        console.error('Failed to fetch categories:', response.message);
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error fetching categories:', xhr.responseText);
+                }
+            });
+        });
+</script> 
 </body>
 
 </html>

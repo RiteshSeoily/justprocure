@@ -1,13 +1,14 @@
 @extends('admin.adminlayouts.app')
-@section('title', 'All sellers')
+@section('title', 'All Sellers')
 @section('content')
 <div class="dashboard_content_wrapper">
    <div class="dashboard dashboard_wrapper pr0-md">
-      <!-- Your sidebar code here -->
-      <div class="dashboard__sidebar">
+
+
+   <div class="dashboard__sidebar">
         <div class="dashboard_sidebar_list">
           <div class="sidebar_list_item">
-            <a href="admin-dashboard" class="items-center -is-active"><i class="fa fa-tachometer mr15"></i> Overview</a>
+            <a href="{{route('admin.home')}}" class="items-center -is-active"><i class="fa fa-tachometer mr15"></i> Overview</a>
           </div>
          <!--  <div class="sidebar_list_item ">
             <a href="rfqs" class="items-center"><i class="fa fa-file-text mr15"></i> Buyer Management</a> -->
@@ -39,12 +40,8 @@
           <button class="dropdown-btn-admin-dashboard-sidebar"><i class="fa fa-inr mr15"></i> Product Management
              <i class="fa fa-caret-down ml10"></i>
          </button>
-        <div class="admin-dashboard-sdebar-dropdown-options">
-         <a href="all-buyer">- Category Lable1</a><br>
-         <a href="all-buyer">- Category Lable2</a><br>
-         <a href="all-buyer">- Category Lable3</a><br>
-         <a href="all-buyer">- All Brands</a><br>
-         <a href="{{ route('products.allproducts')}}">- All Products</a>
+        <div class="admin-dashboard-sdebar-dropdown-options productdrop">
+         
          <!-- <a href="#">Link 2</a>
          <a href="#">Link 3</a> -->
         </div>
@@ -75,6 +72,7 @@
         
         </div>
       </div>
+      <!-- Your sidebar code here -->
       <div class="dashboard__main pl0-md">
          <div class="dashboard__content bg-color-buyer-dashboard">
             <div class="row">
@@ -103,12 +101,14 @@
                               <tr class="buyer-dashboard-recent-activity-table-outer">
                                  <td class="buyer-dashboard-right-border">{{ $index + 1 }}</td>
                                  <td class="buyer-dashboard-right-border">{{ $seller->name }}</td>
-                                 <td class="buyer-dashboard-right-border">{{ $seller->company }}</td>
+                                 <td class="buyer-dashboard-right-border">{{ $seller->propitier_name }}</td>
                                  <td class="buyer-dashboard-right-border">{{ $seller->seller_type }}</td>
                                  <td class="buyer-dashboard-right-border">{{ $seller->phone_number }}</td>
                                  <td class="buyer-dashboard-right-border">{{ $seller->email }}</td>
-                                 <td class="buyer-dashboard-right-border">{{ $seller->product_mapped}}</td>
-                                 <td class="buyer-dashboard-right-border">{{ $seller->approve }}</td>
+                                 <td class="buyer-dashboard-right-border">{{ $seller->product_mapped }}</td>
+                                 <td class="buyer-dashboard-right-border">
+                                    <input type="checkbox" class="approve-checkbox" data-id="{{ $seller->id }}" {{ $seller->approve ? 'checked' : '' }}>
+                                 </td>
                                  <td class="editing_list align-middle">
                                     <ul>
                                        <li class="list-inline-item mb-1">
@@ -180,6 +180,46 @@
                }
            });
        });
+              
+
+
+       $('.approve-checkbox').change(function() {
+    var sellerId = $(this).data('id');
+    var isApproved = $(this).is(':checked') ? 1 : 0;
+
+    $.ajax({
+        url: '/admin/sellers/' + sellerId + '/approve', // Update URL as per your routes
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            approve: isApproved
+        },
+        success: function(response) {
+            if (response.success) {
+                Swal.fire(
+                    'Success!',
+                    response.message,
+                    'success'
+                );
+            } else {
+                Swal.fire(
+                    'Error!',
+                    response.message,
+                    'error'
+                );
+            }
+        },
+        error: function(xhr, status, error) {
+            Swal.fire(
+                'Error!',
+                'An error occurred while updating the approval status.',
+                'error'
+            );
+        }
+    });
+});
+
+     
    });
 </script>
 @endsection

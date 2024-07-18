@@ -9,7 +9,7 @@
       <div class="dashboard__sidebar">
         <div class="dashboard_sidebar_list">
           <div class="sidebar_list_item">
-            <a href="admin-dashboard" class="items-center -is-active"><i class="fa fa-tachometer mr15"></i> Overview</a>
+            <a href="{{route('admin.home')}}" class="items-center -is-active"><i class="fa fa-tachometer mr15"></i> Overview</a>
           </div>
          <!--  <div class="sidebar_list_item ">
             <a href="rfqs" class="items-center"><i class="fa fa-file-text mr15"></i> Buyer Management</a> -->
@@ -41,12 +41,8 @@
           <button class="dropdown-btn-admin-dashboard-sidebar"><i class="fa fa-inr mr15"></i> Product Management
              <i class="fa fa-caret-down ml10"></i>
          </button>
-        <div class="admin-dashboard-sdebar-dropdown-options">
-         <a href="all-buyer">- Category Lable1</a><br>
-         <a href="all-buyer">- Category Lable2</a><br>
-         <a href="all-buyer">- Category Lable3</a><br>
-         <a href="all-buyer">- All Brands</a><br>
-         <a href="{{ route('products.allproducts')}}">- All Products</a>
+        <div class="admin-dashboard-sdebar-dropdown-options productdrop">
+         
          <!-- <a href="#">Link 2</a>
          <a href="#">Link 3</a> -->
         </div>

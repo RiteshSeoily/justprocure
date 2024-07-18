@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Commission;
 use App\Http\Controllers\invoice;
 
@@ -67,6 +68,9 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/singlerfqview/{id}', [SellerController::class, 'singleselllerrfq'])->name('admin.single-seller-rfq');
     Route::get('/SingleSelleredit/{id}', [SellerController::class, 'SingleSellereditRfq'])->name('admin.single-seller-rfq-edit');
     Route::get('/singleSellerProductCount/{id}', [SellerController::class, 'getSingleSellerProductCount']);
+    Route::get('/singleSellerProductDetail/{id}', [SellerController::class, 'getSingleSellerProductDetails']);
+    Route::delete('/seller/{sellerId}/rfq/{sellerRfqId}', [SellerController::class, 'removeSellerRfq'])->name('siseller.rfq.remove');
+    Route::post('/admin/sellers/{id}/approve', [SellerController::class, 'approveSeller'])->name('admin.sellers.approve');
 
     //admin Product Section
     Route::get('/all-products', [ProductController::class, 'allproducts'])->name('products.allproducts');
@@ -74,6 +78,13 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+    
+
+    // category
+     Route::get('/categories', [CategoryController::class, 'allCategoryname'])->name('admin.seller.category');
+     Route::get('/brand', [CategoryController::class, 'allbrandname'])->name('admin.seller.brand');
+
+
 
     //commission Controller Section
     Route::get('/commission', [Commission::class, 'showCommission'])->name('admin.commission');
@@ -95,7 +106,7 @@ Route::middleware('buyer.auth')->group(function () {
 
 Route::middleware('seller.auth')->group(function () {
     Route::get('/seller/dashboard', function () {
-        return view('admin.testing');
+        return view('seller.welcome');
     })->name('seller.home');
 });
 

@@ -54,6 +54,8 @@ function fetchRfqs(sellerId) {
     var pathArray = window.location.pathname.split('/');
     return pathArray[pathArray.length - 1];
 }
+
+
 function fetchRfqCount(sellerId) {
    $.ajax({
        url: '/seller/' + sellerId + '/rfq-count',
@@ -95,6 +97,56 @@ function fetchProductCount(sellerId) {
    });
 }
 
+function fetchProducts(sellerId) {
+    $.ajax({
+        url: `/singleSellerProductDetail/${sellerId}`,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            if (response.success) {
+                let rfqs = response.product_details;
+                let tableBody = $('#products-table tbody');
+                tableBody.empty();
+
+                rfqs.forEach((product, index) => {
+                    tableBody.append(`
+                        <tr class="buyer-dashboard-recent-activity-table-outer">
+                            <td class="buyer-dashboard-right-border">${index + 1}</td>
+                            <td class="buyer-dashboard-right-border">${product.product_name}</td>
+                            <td class="buyer-dashboard-right-border product-image-buyer-rfq-page">
+                               <img src="/${product.tbl_image}" style="width: 60%; height: 100%;" />
+                            </td>
+                            <td class="buyer-dashboard-right-border">${product.category}</td>
+                            <td class="buyer-dashboard-right-border">${product.tbl_selling_price}</td>
+                            <td class="buyer-dashboard-right-border">${product.status}</td>
+                            <td class="editing_list align-middle">
+                                <ul>
+                                    <li class="list-inline-item mb-1">
+                                        <a href="/singleSellerProductDetail/${sellerId}" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
+                                    </li>
+                                    <li class="list-inline-item mb-1">
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
+                                    </li>
+                                    <li class="list-inline-item mb-1">
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-original-title="Delete" aria-label="Delete">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    `);
+                });
+            } else {
+                $('#products-table tbody').html('<tr><td colspan="7">No products found for this seller.</td></tr>');
+            }
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+        }
+    });
+}
+
 
 // Fetch RFQs for the buyer when the page loads
 var sellerId = getBuyerIdFromUrl();
@@ -102,6 +154,7 @@ console.log("Buyer ID from URL:", sellerId); // Log buyer ID to the console
 fetchRfqs(sellerId);
 fetchRfqCount(sellerId);
 fetchProductCount(sellerId);
+fetchProducts(sellerId);
 
  
     $('#defaultOpen').click();

@@ -1,73 +1,94 @@
 @extends('admin.adminlayouts.app') @section('title', 'Product Details') @section('content')
 <div class="dashboard_content_wrapper">
     <div class="dashboard dashboard_wrapper pr0-md">
-    <div class="dashboard__sidebar">
-        <div class="dashboard_sidebar_list">
-          <div class="sidebar_list_item">
-            <a href="{{route('admin.home')}}" class="items-center -is-active"><i class="fa fa-tachometer mr15"></i> Overview</a>
-          </div>
-         <!--  <div class="sidebar_list_item ">
+        <div class="dashboard__sidebar">
+            <div class="dashboard_sidebar_list">
+                <div class="sidebar_list_item">
+                    <a href="admin-dashboard" class="items-center -is-active"><i class="fa fa-tachometer mr15"></i> Overview</a>
+                </div>
+                <!--  <div class="sidebar_list_item ">
             <a href="rfqs" class="items-center"><i class="fa fa-file-text mr15"></i> Buyer Management</a> -->
-           
-          <button class="dropdown-btn-admin-dashboard-sidebar"><i class="fa fa-file-text mr15"></i> Buyer Management
-             <i class="fa fa-caret-down ml10"></i>
-         </button>
-        <div class="admin-dashboard-sdebar-dropdown-options">
-         <a href="{{ route('admin.buyers.all')}}">All Buyers</a>
-         <!-- <a href="#">Link 2</a>
-         <a href="#">Link 3</a> -->
-        </div>
 
-         <!--  </div> -->
-          <!-- <div class="sidebar_list_item ">
+                <button class="dropdown-btn-admin-dashboard-sidebar">
+                    <i class="fa fa-file-text mr15"></i> Buyer Management
+                    <i class="fa fa-caret-down ml10"></i>
+                </button>
+                <div class="admin-dashboard-sdebar-dropdown-options">
+                    <a href="all-buyer">- All Buyers</a>
+                    <!-- <a href="#">Link 2</a>
+         <a href="#">Link 3</a> -->
+                </div>
+
+                <!--  </div> -->
+                <!-- <div class="sidebar_list_item ">
             <a href="buyer-orders" class="items-center"><i class="fa fa-shopping-cart mr15"></i> Seller Management</a>
           </div> -->
-           <button class="dropdown-btn-admin-dashboard-sidebar"><i class="fa fa-file-text mr15"></i> Seller Management
-             <i class="fa fa-caret-down ml10"></i>
-         </button>
-        <div class="admin-dashboard-sdebar-dropdown-options">
-        <a href="{{ route('admin.sellers.all')}}">All sellers</a>
-         <!-- <a href="#">Link 2</a>
+                <button class="dropdown-btn-admin-dashboard-sidebar">
+                    <i class="fa fa-file-text mr15"></i> Seller Management
+                    <i class="fa fa-caret-down ml10"></i>
+                </button>
+                <div class="admin-dashboard-sdebar-dropdown-options">
+                    <a href="all-seller">- All Sellers</a>
+                    <!-- <a href="#">Link 2</a>
          <a href="#">Link 3</a> -->
-        </div>
-          <!-- <div class="sidebar_list_item ">
+                </div>
+                <!-- <div class="sidebar_list_item ">
             <a href="#" class="items-center"><i class="fa fa-inr mr15"></i> Product Management</a>
           </div> -->
-          <button class="dropdown-btn-admin-dashboard-sidebar"><i class="fa fa-inr mr15"></i> Product Management
-             <i class="fa fa-caret-down ml10"></i>
-         </button>
-        <div class="admin-dashboard-sdebar-dropdown-options productdrop">
-         
-         <!-- <a href="#">Link 2</a>
+                <button class="dropdown-btn-admin-dashboard-sidebar">
+                    <i class="fa fa-inr mr15"></i> Product Management
+                    <i class="fa fa-caret-down ml10"></i>
+                </button>
+                <div class="admin-dashboard-sdebar-dropdown-options">
+                    <a href="#">- Category Lable1</a><br />
+                    <a href="#">- Category Lable2</a><br />
+                    <a href="#">- Category Lable3</a><br />
+                    <a href="#">- All Brands</a><br />
+                    <a href="#">- All Products</a>
+                    <!-- <a href="#">Link 2</a>
          <a href="#">Link 3</a> -->
-        </div>
-          <div class="sidebar_list_item ">
-            <a href="{{ route('admin.commission')}}" class="items-center"><i class="fa fa-box mr15"></i>Commission</a>
+                </div>
+                <div class="sidebar_list_item">
+                    <a href="#" class="items-center"><i class="fa fa-box mr15"></i>Commission</a>
+                </div>
+                <div class="sidebar_list_item">
+                    <a href="#" class="items-center"><i class="fa fa-box mr15"></i>PO & Invoices List</a>
+                </div>
+                <div class="sidebar_list_item">
+                    <a href="#" class="items-center"><i class="fa fa-bell mr15"></i>Notification</a>
+                </div>
+                <div class="sidebar_list_item">
+                    <a href="#" class="items-center"><i class="fa fa-cog mr15"></i>Settings</a>
+                </div>
+                <!--<div class="sidebar_list_item ">
+            <a href="buyer-wishlist" class="items-center"><i class="fa fa-heart mr15"></i>Wishlist</a>
           </div>
           <div class="sidebar_list_item ">
-            <a href="{{ route('admin.invoice')}}" class="items-center"><i class="fa fa-box mr15"></i>PO & Invoices List</a>
+            <a href="buyer-savings" class="items-center"><i class="fa fa-piggy-bank animated-icon mr15"></i>Savings</a>
           </div>
           <div class="sidebar_list_item ">
-            <a href="#" class="items-center"><i class="fa fa-bell mr15"></i>Notification</a>
+            <a href="buyer-saved-addresses" class="items-center"><i class="fa fa-map-marker-alt mr15"></i>Saved Addresses</a>
           </div>
           <div class="sidebar_list_item ">
-            <a href="#" class="items-center"><i class="fa fa-cog mr15"></i>Settings</a>
-          </div> 
+            <a href="buyer-notifications" class="items-center"><i class="fa fa-bell mr15"></i>Notification</a>
+          </div>
+          <div class="sidebar_list_item ">
+            <a href="buyer-settings" class="items-center"><i class="fa fa-cog mr15"></i>Settings</a>
+          </div>-->
 
-          <div class="chat-with-us-buyer-dashboard">
-            <div class="chat-with-us-buyer-dashboard-image">
-              <img src="images/buyer-dashboard/client.png">
+                <div class="chat-with-us-buyer-dashboard">
+                    <div class="chat-with-us-buyer-dashboard-image">
+                        <img src="images/buyer-dashboard/client.png" />
+                    </div>
+
+                    <div class="chat-with-us-buyer-dashboard-text">
+                        <p>Need support on your order or have any enquiry?</p>
+                    </div>
+
+                    <button class="chat-with-us-button-dashboard">Chat with us</button>
+                </div>
             </div>
-
-            <div class="chat-with-us-buyer-dashboard-text">
-              <p>Need support on your order or have any enquiry?</p>
-            </div>
-
-            <button class="chat-with-us-button-dashboard">Chat with us</button>
-          </div>
-        
         </div>
-      </div>
 
         <div class="dashboard__main pl0-md">
             <div class="dashboard__content bg-color-buyer-dashboard">
@@ -83,10 +104,8 @@
                             <div class="radio-button-admin-dashboard-outer">
                                 <form class="radio-button-admin-dashboard" action="">
                                     <div class="admin-dashboard-radio-button-input">
-                                    @foreach($sellers as $index => $seller)
-                                    <input type="radio" id="all" name="seller_registration" value="all" />
-                                        <label class="admin-dashboard-radio-button-label" for="all">{{ $seller->register_at}}</label>
-                                    @endforeach
+                                        <input type="radio" id="all" name="all" value="all" />
+                                        <label class="admin-dashboard-radio-button-label" for="all">ALL SELLER</label>
                                     </div>
                                     <!--<input type="submit" value="Submit"> -->
                                 </form>
@@ -94,7 +113,6 @@
 
                             <div class="admin-dashboard-search-bar-outer">
                                 <form class="searchbar-admin-dashboard-outer" action="">
-                                    
                                     <input type="text" placeholder="Search.." name="search" class="searchbar-admin-dashboard" />
                                     <button class="searchbar-icon-admin-dashboard" type="submit"><i class="fa fa-search"></i></button>
                                 </form>
@@ -104,41 +122,41 @@
                                 Export
                             </button>
 
-                            <a href = "{{ route('admin.sellers.all')}}"><button class="back-button-for-rfq-buyer" onclick="" tabindex="-1" aria-disabled="true"><span class="fa fa-arrow-left"></span> BACK</button></a>
+                            <button class="back-button-for-rfq-buyer" onclick="" tabindex="-1" aria-disabled="true"><span class="fa fa-arrow-left"></span> BACK</button>
                         </div>
 
                         <div class="dashboard_product_list account_user_deails">
                             <div class="row d-block d-sm-flex justify-content-center justify-content-sm-between"></div>
                             <div class="order_table table-responsive">
-                                <table class="table" id="dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" class="heading-buyer-dashboard-recent-activity">S. No.</th>
-                                            <th scope="col" class="heading-buyer-dashboard-recent-activity">NAME</th>
-                                            <th scope="col" class="heading-buyer-dashboard-recent-activity">EMAIL</th>
-                                            <th scope="col" class="heading-buyer-dashboard-recent-activity">PHONE NUMBER</th>
-                                            <th scope="col" class="heading-buyer-dashboard-recent-activity">GST</th>
-                                            <th scope="col" class="heading-buyer-dashboard-recent-activity">PAN</th>
-                                            <th scope="col" class="heading-buyer-dashboard-recent-activity">ADDRESS</th>
-                                            <th scope="col" class="heading-buyer-dashboard-recent-activity">COMPANY NAME</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($sellers as $index => $seller)
-                                        <tr class="buyer-dashboard-recent-activity-table-outer">
-                                            <td class="buyer-dashboard-right-border">{{ $index+1 }}</td>
-                                            <td class="buyer-dashboard-right-border">{{ $seller->name}}</td>
-                                            <td class="buyer-dashboard-right-border">{{ $seller->email }}</td>
-                                            <td class="buyer-dashboard-right-border">{{ $seller->phone_number }}</td>
-                                            <td class="buyer-dashboard-right-border">{{ $seller->gst_number }}</td>
-                                            <td class="buyer-dashboard-right-border">{{ $seller->pan_number }}</td>
-                                            <td class="buyer-dashboard-right-border">{{ $seller->address }}</td>
-                                            <td class="buyer-dashboard-right-border">{{ $seller->company_name}}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+         <table class="table" id="dataTable">
+            <thead>
+               <tr>
+                  <th scope="col" class="heading-buyer-dashboard-recent-activity">S. No.</th>
+                  <th scope="col" class="heading-buyer-dashboard-recent-activity">NAME</th>
+                  <th scope="col" class="heading-buyer-dashboard-recent-activity">EMAIL</th>
+                  <th scope="col" class="heading-buyer-dashboard-recent-activity">PHONE NUMBER</th>
+                  <th scope="col" class="heading-buyer-dashboard-recent-activity">GST</th>
+                  <th scope="col" class="heading-buyer-dashboard-recent-activity">PAN</th>
+                  <th scope="col" class="heading-buyer-dashboard-recent-activity">ADDRESS</th>
+                  <th scope="col" class="heading-buyer-dashboard-recent-activity">COMPANY NAME</th>
+               </tr>
+            </thead>
+            <tbody>
+               @foreach($sellers as $index => $seller)
+               <tr class="buyer-dashboard-recent-activity-table-outer">
+                  <td class="buyer-dashboard-right-border">{{ $index+1 }}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->name}}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->email }}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->phone_number }}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->gst_number }}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->pan_number }}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->address }}</td>
+                  <td class="buyer-dashboard-right-border">{{ $seller->company_name}}</td>
+               </tr>
+               @endforeach
+            </tbody>
+         </table>
+      </div>
                         </div>
 
                         <div class="row buyerdashboard-overview-page-rfq-box-webview">
@@ -175,7 +193,7 @@
                                             </div>
                                             <div class="buyer-dashboard-icon-heading">
                                                 <h5>Products</h5>
-                                                <h2 id="totalProductCount">0</h2>
+                                                <h2 id = 'totalProductCount'>0</h2>
                                             </div>
                                         </div>
                                     </div>
@@ -241,33 +259,53 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!--<div class="buyer-dashboard-icon-section-box">
+                 <div class="buyer-dashboard-icon-image">
+                   <i class="fa fa-box"></i>
+                 </div>
+                 <div class="buyer-dashboard-icon-heading">
+                   <h5>Total Orders</h5>
+                   <h2>0</h2>
+                 </div>
+               </div>
+
+               <div class="buyer-dashboard-icon-section-box">
+                 <div class="buyer-dashboard-icon-image">
+                   <i class="fa fa-piggy-bank"></i>
+                 </div>
+                 <div class="buyer-dashboard-icon-heading">
+                   <h5>Total Order Value</h5>
+                   <h2>0</h2>
+                 </div>
+               </div> -->
                                 </div>
                             </div>
                         </div>
 
                         <!--RFQ-table-start-->
-                        <div class="tabcontent" id="rfq-table">
-                            <div class="col-xl-12">
-                                <div class="dashboard_product_list account_user_deails">
-                                    <div class="order_table table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col" class="heading-buyer-dashboard-recent-activity">S. No.</th>
-                                                    <th scope="col" class="heading-buyer-dashboard-recent-activity">RFQ ID</th>
-                                                    <th scope="col" class="heading-buyer-dashboard-recent-activity">DATE</th>
-                                                    <th scope="col" class="heading-buyer-dashboard-recent-activity">PRODUCTS</th>
-                                                    <th scope="col" class="heading-buyer-dashboard-recent-activity">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="rfqTableBody">
-                                                <!-- Data will be populated here via AJAX -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="tabcontent" id="rfq-table" >
+      <div class="col-xl-12">
+         <div class="dashboard_product_list account_user_deails">
+            <div class="order_table table-responsive">
+               <table class="table">
+                  <thead>
+                     <tr>
+                        <th scope="col" class="heading-buyer-dashboard-recent-activity">S. No.</th>
+                        <th scope="col" class="heading-buyer-dashboard-recent-activity">RFQ ID</th>
+                        <th scope="col" class="heading-buyer-dashboard-recent-activity">DATE</th>
+                        <th scope="col" class="heading-buyer-dashboard-recent-activity">PRODUCTS</th>
+                        <th scope="col" class="heading-buyer-dashboard-recent-activity">Action</th>
+                     </tr>
+                  </thead>
+                  <tbody id="rfqTableBody">
+                     <!-- Data will be populated here via AJAX -->
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
 
                         <!--RFQ-table-end-->
 
@@ -486,8 +524,102 @@
                                                     <th scope="col" class="heading-buyer-dashboard-recent-activity">ACTIONS</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="productTableBody">
-                                                <!-- /data from backend -->
+                                            <tbody>
+                                                <tr class="buyer-dashboard-recent-activity-table-outer">
+                                                    <td class="buyer-dashboard-right-border">01</td>
+                                                    <td class="buyer-dashboard-right-border">Summer Hosiery Government...</td>
+                                                    <td class="buyer-dashboard-right-border product-image-buyer-rfq-page"><img src="images/buyer-dashboard/product.jpeg" /></td>
+                                                    <td class="buyer-dashboard-right-border">EDUCATION INSTITUTES&gt;&gt; Stationery&gt;&gt; ...</td>
+                                                    <td class="buyer-dashboard-right-border">100</td>
+                                                    <td class="buyer-dashboard-right-border">Dropdown</td>
+                                                    <td class="editing_list align-middle">
+                                                        <ul>
+                                                            <li class="list-inline-item mb-1">
+                                                                <a href="all-buyer-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
+                                                            </li>
+                                                            <li class="list-inline-item mb-1">
+                                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="list-inline-item mb-1">
+                                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-original-title="Delete" aria-label="Delete">
+                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="buyer-dashboard-recent-activity-table-outer">
+                                                    <td class="buyer-dashboard-right-border">02</td>
+                                                    <td class="buyer-dashboard-right-border">Summer Hosiery Government...</td>
+                                                    <td class="buyer-dashboard-right-border product-image-buyer-rfq-page"><img src="images/buyer-dashboard/product.jpeg" /></td>
+                                                    <td class="buyer-dashboard-right-border">EDUCATION INSTITUTES&gt;&gt; Stationery&gt;&gt; ...</td>
+                                                    <td class="buyer-dashboard-right-border">100</td>
+                                                    <td class="buyer-dashboard-right-border">Dropdown</td>
+                                                    <td class="editing_list align-middle">
+                                                        <ul>
+                                                            <li class="list-inline-item mb-1">
+                                                                <a href="all-buyer-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
+                                                            </li>
+                                                            <li class="list-inline-item mb-1">
+                                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="list-inline-item mb-1">
+                                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-original-title="Delete" aria-label="Delete">
+                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="buyer-dashboard-recent-activity-table-outer">
+                                                    <td class="buyer-dashboard-right-border">03</td>
+                                                    <td class="buyer-dashboard-right-border">Summer Hosiery Government...</td>
+                                                    <td class="buyer-dashboard-right-border product-image-buyer-rfq-page"><img src="images/buyer-dashboard/product.jpeg" /></td>
+                                                    <td class="buyer-dashboard-right-border">EDUCATION INSTITUTES&gt;&gt; Stationery&gt;&gt; ...</td>
+                                                    <td class="buyer-dashboard-right-border">100</td>
+                                                    <td class="buyer-dashboard-right-border">Dropdown</td>
+                                                    <td class="editing_list align-middle">
+                                                        <ul>
+                                                            <li class="list-inline-item mb-1">
+                                                                <a href="all-buyer-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
+                                                            </li>
+                                                            <li class="list-inline-item mb-1">
+                                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="list-inline-item mb-1">
+                                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-original-title="Delete" aria-label="Delete">
+                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="buyer-dashboard-recent-activity-table-outer">
+                                                    <td class="buyer-dashboard-right-border">04</td>
+                                                    <td class="buyer-dashboard-right-border">Summer Hosiery Government...</td>
+                                                    <td class="buyer-dashboard-right-border product-image-buyer-rfq-page"><img src="images/buyer-dashboard/product.jpeg" /></td>
+                                                    <td class="buyer-dashboard-right-border">EDUCATION INSTITUTES&gt;&gt; Stationery&gt;&gt; ...</td>
+                                                    <td class="buyer-dashboard-right-border">100</td>
+                                                    <td class="buyer-dashboard-right-border">Dropdown</td>
+                                                    <td class="editing_list align-middle">
+                                                        <ul>
+                                                            <li class="list-inline-item mb-1">
+                                                                <a href="all-buyer-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-original-title="View" aria-label="View"><i class="fa fa-eye"></i></a>
+                                                            </li>
+                                                            <li class="list-inline-item mb-1">
+                                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-original-title="Edit" aria-label="Edit"><i class="fa fa-pen" aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="list-inline-item mb-1">
+                                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-original-title="Delete" aria-label="Delete">
+                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -884,7 +1016,6 @@
                         // Get the element with id="defaultOpen" and click on it
                         document.getElementById("defaultOpen").click();
                     </script>
-                    
 
                     <!--tablinks for our work section end -->
                 </div>

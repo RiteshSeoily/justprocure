@@ -245,7 +245,102 @@ class SellerController extends Controller
         ], 200);
     }
     
+    public function getSingleSellerProductDetails($id)
+    {
+        $rfqs = SellerRfq::where('seller_id', $id)
+                         ->with('rfq')
+                         ->get();
+    
+        $productDetails = [];
+    
+        foreach ($rfqs as $rfq) {
+            $typeAIds = array_map('intval', explode(',', $rfq->rfq->type_a_ids));
+            $typeBIds = array_map('intval', explode(',', $rfq->rfq->type_b_ids));
+            $typeCIds = array_map('intval', explode(',', $rfq->rfq->type_c_ids));
+            $productIds = array_unique(array_merge($typeAIds, $typeBIds, $typeCIds));
+    
+            $products = tbl_product::whereIn('id', $productIds)
+                                  ->with('details')
+                                  ->get();
+    
+            foreach ($products as $product) {
+                $productDetailsArray = [
+                    'sellerrfq_id' => $rfq->id, 
+                    'product_name' => $product->product_name,
+                    'tbl_image' => $product->tbl_image,
+                    'status' => $product->status,
+                ];
+                $sellingPrice = null;
+    
+                if ($product->details->isNotEmpty()) {
+                    $sellingPrice = $product->details->first()->tbl_selling_price;
+                }
+    
+                $productDetailsArray['tbl_selling_price'] = $sellingPrice;
+                $productDetails[] = $productDetailsArray;
+            }
+        }
+    
+        
+            return response()->json([
+                'success' => true,
+                'product_details' => $productDetails
+            ], 200);
+    }
+    
+    public function removeSellerRfq($sellerId, $sellerRfqId)
+    {
+        // Find the SellerRfq entry by seller_id and id
+        $sellerRfq = SellerRfq::where('seller_id', $sellerId)
+                              ->where('id', $sellerRfqId)
+                              ->first();
+
+        if (!$sellerRfq) {
+            // If no entry is found, return a 404 response
+            return response()->json([
+                'success' => false,
+                'message' => 'SellerRfq entry not found for seller_id and id combination.',
+            ], 404);
+        }
+
+        // Store the rfq_id for further operations if needed
+        $rfqId = $sellerRfq->rfq_id;
+
+        // Delete the SellerRfq entry
+        $sellerRfq->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'SellerRfq entry removed successfully.',
+            'rfq_id' => $rfqId,
+            'seller_id' => $sellerId,
+            'seller_rfq_id' => $sellerRfqId,
+        ], 200);
+    }
+
+    public function approveSeller(Request $request, $id)
+    {
+        // Find the seller by ID
+        $seller = Seller::find($id);
+        
+        // Check if seller exists
+        if (!$seller) {
+            return response()->json(['success' => false, 'message' => 'Seller not found'], 404);
+        }
+    
+        // Update seller's approval status
+        try {
+            $seller->approve = $request->input('approve');
+            $seller->save();
+    
+            return response()->json(['success' => true, 'message' => 'Approval status updated successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Failed to update approval status'], 500);
+        }
+    }
     
 
+          
+    
 
 }

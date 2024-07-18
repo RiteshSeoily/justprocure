@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('seller_rfqs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('rfq_id');
-            $table->foreign('rfq_id')->references('id')->on('list_rfqs')->onDelete('cascade');
+            $table->foreign('rfq_id')->references('id')->on('list_rfqs')->onDelete('restrict');
             $table->unsignedBigInteger('seller_id');
-            $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade');
+            $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('restrict');
             $table->unsignedBigInteger('product_id')->nullable(); // product_id column (int(11))
-            $table->foreign('product_id')->references('id')->on('tbl_products')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('tbl_products')->onDelete('restrict');
             $table->timestamps();
         });
     }
