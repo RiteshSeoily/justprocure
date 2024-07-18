@@ -170,8 +170,6 @@ class SellerController extends Controller
         return view('admin.single-seller-rfq', ['rfqData' => $rfqData]);
     }
 
-
-
     public function SingleSellereditRfq($id)
     {
         $rfqs = ListRfq::where('id', $id)->get();
@@ -214,4 +212,40 @@ class SellerController extends Controller
         }
     }
     
+    public function getSingleSellerProductCount($id)
+    {
+        $rfqs = SellerRfq::where('seller_id', $id)
+                         ->with('rfq') 
+                         ->get();
+    
+        $totalProductCount = 0;
+    
+        foreach ($rfqs as $rfq) {
+            $typeAIds = array_map('intval', explode(',', $rfq->rfq->type_a_ids));
+            $typeBIds = array_map('intval', explode(',', $rfq->rfq->type_b_ids));
+            $typeCIds = array_map('intval', explode(',', $rfq->rfq->type_c_ids));
+            $productIds = array_unique(array_merge($typeAIds, $typeBIds, $typeCIds));
+    
+            $products = tbl_product::whereIn('id', $productIds)
+                                  ->pluck('product_name', 'id');
+    
+            $productNames = [];
+            foreach ($productIds as $productId) {
+                if (isset($products[$productId])) {
+                    $productNames[] = $products[$productId];
+                }
+            }
+    
+            $totalProductCount += count($productNames);
+        }
+    
+        return response()->json([
+            'success' => true,
+            'total_product_count' => $totalProductCount
+        ], 200);
+    }
+    
+    
+
+
 }

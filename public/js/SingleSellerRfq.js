@@ -75,11 +75,33 @@ function fetchRfqCount(sellerId) {
 }
 
 
+function fetchProductCount(sellerId) {
+   $.ajax({
+       url: '/singleSellerProductCount/' + sellerId,
+       type: 'GET',
+       dataType: 'json',
+       success: function(response) {
+           if (response.success) {
+               $('#totalProductCount').text(response.total_product_count); // Update the RFQ count
+           } else {
+               console.error('Failed to fetch RFQ count:', response.message);
+               $('#totalProductCount').text('0'); // Display default count if failed
+           }
+       },
+       error: function(xhr) {
+           console.error('Error fetching RFQ count:', xhr.responseText);
+           $('#totalRfqCount').text('0'); // Display default count on error
+       }
+   });
+}
+
+
 // Fetch RFQs for the buyer when the page loads
 var sellerId = getBuyerIdFromUrl();
 console.log("Buyer ID from URL:", sellerId); // Log buyer ID to the console
 fetchRfqs(sellerId);
-fetchRfqCount(sellerId)
+fetchRfqCount(sellerId);
+fetchProductCount(sellerId);
 
  
     $('#defaultOpen').click();

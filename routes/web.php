@@ -66,7 +66,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/seller/{id}/rfq-data', [SellerController::class, 'getSingleSellerRfqData'])->name('admin.seller.rfq.data');
     Route::get('/singlerfqview/{id}', [SellerController::class, 'singleselllerrfq'])->name('admin.single-seller-rfq');
     Route::get('/SingleSelleredit/{id}', [SellerController::class, 'SingleSellereditRfq'])->name('admin.single-seller-rfq-edit');
-
+    Route::get('/singleSellerProductCount/{id}', [SellerController::class, 'getSingleSellerProductCount']);
 
     //admin Product Section
     Route::get('/all-products', [ProductController::class, 'allproducts'])->name('products.allproducts');
@@ -95,7 +95,7 @@ Route::middleware('buyer.auth')->group(function () {
 
 Route::middleware('seller.auth')->group(function () {
     Route::get('/seller/dashboard', function () {
-        return view('seller.welcome');
+        return view('admin.testing');
     })->name('seller.home');
 });
 
