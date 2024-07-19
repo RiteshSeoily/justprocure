@@ -23,4 +23,8 @@ class tbl_category extends Model
     {
         return $this->hasMany(tbl_sub_category::class, 'cat_id');
     }
+    public function products()
+    {
+        return $this->hasMany(tbl_product::class, 'cat_id');
+    }
 }

@@ -11,9 +11,10 @@ class ProductController extends Controller
    
     public function allproducts()
     {
-        $products = tbl_product::with('details')->get();
-        // return response()->json($products);
-         return view('admin.all-products', compact('products'));
+        
+        $products = tbl_product::with(['details', 'category'])->get();
+
+        return view('admin.all-products', compact('products'));
     }
 
     public function show($id)

@@ -64,7 +64,6 @@ class CategoryController extends Controller
         ], 200);
     }
 
-
     public function getSubSubCategories($categoryId)
     {
         $subSubCategories = DB::table('tbl_sub_sub_categories')

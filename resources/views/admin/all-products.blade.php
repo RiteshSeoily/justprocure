@@ -106,13 +106,7 @@
                                                 <img src="{{ asset($product->tbl_image ?? 'images/buyer-dashboard/product.jpeg') }}" alt="{{ $product->product_name }}" />
                                             </td>
                                             <td class="buyer-dashboard-right-border">
-                                                @if ($product->details->isEmpty())
-                                                No details available
-                                                @else
-                                                @foreach ($product->details as $detail)
-                                                {{ $detail->category }}
-                                                @endforeach
-                                                @endif
+                                            {{ $product->category->category_name }}
                                             </td>
                                             <td class="buyer-dashboard-right-border">
                                                 @if ($product->details->isEmpty())

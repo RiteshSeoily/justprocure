@@ -49,6 +49,10 @@ class tbl_product extends Model
     {
         return $this->hasMany(tbl_product_detail::class, 'product_id');
     }
+    public function category()
+    {
+        return $this->belongsTo(tbl_category::class, 'cat_id');
+    }
 
     // Define other relationships as needed
 }
