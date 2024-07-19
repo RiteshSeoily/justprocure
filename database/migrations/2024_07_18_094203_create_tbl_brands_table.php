@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('buyer_id'); // Adding buyer_id
             $table->foreign('buyer_id')->references('id')->on('buyers')->onDelete('restrict');
             $table->unsignedBigInteger('sub_cat_id')->index();
+            $table->foreign('sub-cat_id')->references('id')->on('tbl_sub_categories')->onDelete('restrict');
             $table->string('brand_name');
             $table->integer('is_top')->default(0)->comment('1=>top_brand,0=>no_top_brand');
             $table->string('tbl_image')->nullable();

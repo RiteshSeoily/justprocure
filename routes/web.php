@@ -83,6 +83,7 @@ Route::middleware('admin.auth')->group(function () {
 
     // category
      Route::get('/categories', [CategoryController::class, 'allCategoryname'])->name('admin.seller.category');
+     Route::get('/subcategories/{id}', [CategoryController::class, 'allSubCatbyCatId'])->name('admin.seller.subcategory');
      Route::get('/brand', [CategoryController::class, 'allbrandname'])->name('admin.seller.brand');
 
 
