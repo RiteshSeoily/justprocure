@@ -42,7 +42,8 @@ class CategoryController extends Controller
 
     public function allSubCatbyCatId($id)
     {
-        // Fetch subcategories by category ID using a join
+        // inner join
+       
         $subCategories = DB::table('tbl_categories')
             ->leftJoin('tbl_sub_categories', 'tbl_categories.id', '=', 'tbl_sub_categories.cat_id')
             ->select(
@@ -56,7 +57,7 @@ class CategoryController extends Controller
             ->where('tbl_categories.id', $id)
             ->get();
 
-        // Return the results as JSON
+
         return response()->json([
             'success' => true,
             'subCategories' => $subCategories
