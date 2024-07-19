@@ -141,7 +141,7 @@
                  </div>
                  <div class="buyer-dashboard-icon-heading">
                    <h5>Products on Website</h5>
-                   <h2>25</h2>
+                   <h2 id = "total-products">Loading...</h2>
                  </div>
                </div>
 
@@ -151,7 +151,7 @@
                  </div>
                  <div class="buyer-dashboard-icon-heading">
                    <h5>Total Brands Avilable</h5>
-                   <h2 id ="total-brands">loading...</h2>
+                   <h2 id ="total-brands">Loading...</h2>
                  </div>
                </div>
 
@@ -519,6 +519,24 @@ for (i = 0; i < dropdown.length; i++) {
         });
     });
 </script>
+
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "{{ route('products.approved.count') }}",
+            method: "GET",
+            dataType: "json",
+            success: function(response) {
+                $('#total-products').text(response.approved_product_count);
+            },
+            error: function(error) {
+                console.log("Error fetching buyer count:", error);
+            }
+        });
+    });
+</script>
+
 <script>
     $(document).ready(function() {
         $.ajax({

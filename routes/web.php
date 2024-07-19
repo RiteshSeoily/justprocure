@@ -80,6 +80,8 @@ Route::middleware('admin.auth')->group(function () {
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::get('/products-by-category/{categoryName}', [ProductController::class, 'getProductsByCategory']);
+    Route::get('/products/approved-count', [ProductController::class, 'countApprovedProducts'])->name('products.approved.count'); 
+   
 
     // category
      Route::get('/categories', [CategoryController::class, 'allCategoryname'])->name('admin.seller.category');

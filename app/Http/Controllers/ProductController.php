@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+
+    public function countApprovedProducts()
+    {
+        $approvedProductCount = tbl_product::where('is_approved', 1)->count();
+
+        return response()->json([
+            'approved_product_count' => $approvedProductCount
+        ], 200);
+    }
    
     public function allproducts()
     {
