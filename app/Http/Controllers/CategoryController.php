@@ -65,5 +65,27 @@ class CategoryController extends Controller
     }
 
 
+    public function getSubSubCategories($categoryId)
+    {
+        $subSubCategories = DB::table('tbl_sub_sub_categories')
+            ->leftJoin('tbl_categories', 'tbl_sub_sub_categories.cat_id', '=', 'tbl_categories.id')
+            ->leftJoin('tbl_sub_categories', 'tbl_sub_sub_categories.sub_cat_id', '=', 'tbl_sub_categories.id')
+            ->where('tbl_categories.id', $categoryId) // Filter by category ID
+            ->select(
+                'tbl_sub_sub_categories.id as sub_sub_cat_id',
+                'tbl_sub_sub_categories.category_name',
+                'tbl_sub_sub_categories.category_slug',
+                'tbl_sub_sub_categories.tbl_image',
+                'tbl_categories.category_name as category_name',
+                'tbl_sub_categories.sub_category_name as sub_category_name'
+            )
+            ->get();
+    
+        return response()->json([
+            'success' => true,
+            'subSubCategories' => $subSubCategories
+        ], 200);
+    }
+
 
 }

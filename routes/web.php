@@ -46,7 +46,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::delete('buyers/{id}', [BuyerController::class, 'destroy'])->name('admin.buyers.destroy');
     Route::get('buyers-count', [BuyerController::class, 'count'])->name('admin.buyers.count');
     Route::get('all-buyers', [BuyerController::class, 'allBuyersdata'])->name('admin.buyers.all');
-
+    
     Route::get('/rfq-count', [BuyerController::class, 'rfqcount'])->name('admin.allrfqs');
     Route::get('/all-gst/{id}', [BuyerController::class, 'getAddressByUserId'])->name('admin.addresses.byUserId');
     Route::get('/buyer-rfq-count/{buyerId}', [BuyerController::class, 'rfqcountByBuyerId'])->name('admin.rfq.count');
@@ -84,6 +84,7 @@ Route::middleware('admin.auth')->group(function () {
     // category
      Route::get('/categories', [CategoryController::class, 'allCategoryname'])->name('admin.seller.category');
      Route::get('/subcategories/{id}', [CategoryController::class, 'allSubCatbyCatId'])->name('admin.seller.subcategory');
+     Route::get('/subsubcategories/{id}', [CategoryController::class, 'getSubSubCategories'])->name('admin.seller.subsubcategory');
      Route::get('/brand', [CategoryController::class, 'allbrandname'])->name('admin.seller.brand');
 
 
