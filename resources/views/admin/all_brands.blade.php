@@ -116,7 +116,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="list-inline-item mb-1">
-                                                        <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" aria-label="Edit">
+                                                        <a href="{{ route('admin.brand.edit', $brand->id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" aria-label="Edit">
                                                             <i class="fa fa-pen"></i>
                                                         </a>
                                                     </li>

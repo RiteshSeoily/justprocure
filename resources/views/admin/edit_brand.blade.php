@@ -1,6 +1,6 @@
 @extends('admin.adminlayouts.app')
 
-@section('title', 'Create Brand')
+@section('title', 'Edit Brand')
 
 @section('content')
 <div class="dashboard_content_wrapper">
@@ -80,18 +80,21 @@
                      <!-- Search and radio buttons section -->
                   </div>
                   <div class="dashboard_product_list account_user_deails bg-light p-4 rounded">
-                     <form action="{{ route('admin.brand.create') }}" method="POST">
+                     <form action="{{ route('admin.brand.update', ['id' => $brand->id]) }}" method="POST">
                         @csrf
+                        @method('PUT') <!-- This specifies the PUT method -->
                         <div class="form-group">
                            <label for="brand_name">Brand Name</label>
-                           <input type="text" class="form-control" id="brand_name" name="brand_name" required>
+                           <input type="text" class="form-control" id="brand_name" name="brand_name" value="{{ $brand->brand_name }}" required>
                         </div>
                         <div class="form-group">
                            <label for="cat_id">Category</label>
                            <select class="form-control" id="cat_id" name="cat_id" required>
                               <option value="">Select Category</option>
                               @foreach($categories as $category)
-                                 <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                 <option value="{{ $category->id }}" {{ $brand->cat_id == $category->id ? 'selected' : '' }}>
+                                    {{ $category->category_name }}
+                                 </option>
                               @endforeach
                            </select>
                         </div>
@@ -100,22 +103,20 @@
                            <select class="form-control" id="sub_cat_id" name="sub_cat_id" required>
                               <option value="">Select Subcategory</option>
                               @foreach($subcategories as $subcategory)
-                                 <option value="{{ $subcategory->id }}">{{ $subcategory->sub_category_name }}</option>
+                                 <option value="{{ $subcategory->id }}" {{ $brand->sub_cat_id == $subcategory->id ? 'selected' : '' }}>
+                                    {{ $subcategory->sub_category_name }}
+                                 </option>
                               @endforeach
                            </select>
                         </div>
                         <div class="form-group">
                            <label for="is_top">Is Top Brand</label>
                            <select class="form-control" id="is_top" name="is_top" required>
-                              <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="1" {{ $brand->is_top ? 'selected' : '' }}>Yes</option>
+                              <option value="0" {{ !$brand->is_top ? 'selected' : '' }}>No</option>
                            </select>
                         </div>
-                        <div class="form-group">
-                           <label for="tbl_image">Image URL</label>
-                           <input type="text" class="form-control" id="tbl_image" name="tbl_image">
-                        </div>
-                        <button type="submit" class="btn btn-warning" style="margin-top : 2rem;">Create Brand</button>
+                        <button type="submit" class="btn btn-warning" style="margin-top : 2rem;">Update Brand</button>
                      </form>
                   </div>
                </div>

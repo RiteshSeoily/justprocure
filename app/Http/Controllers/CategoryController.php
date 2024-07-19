@@ -79,7 +79,7 @@ class CategoryController extends Controller
 
          
 
-    public function showCreateForm()
+    public function showBrandCreateForm()
     {
         $categories = tbl_category::all();
         $subcategories = tbl_sub_category::all();
@@ -104,7 +104,7 @@ class CategoryController extends Controller
         return view('admin.all_brands', compact('brands'));
     }
 
-    public function create(Request $request)
+    public function createBrand(Request $request)
     {
         $request->validate([
             'brand_name' => 'required|string|max:255',
@@ -126,31 +126,39 @@ class CategoryController extends Controller
     }
     
 
+    public function editBrand($id)
+    {
+        $brand = tbl_brand::findOrFail($id);
+        $categories = tbl_category::all(); // Fetch all categories
+        $subcategories = tbl_sub_category::where('cat_id', $brand->cat_id)->get(); // Fetch subcategories for the selected category
+    
+        return view('admin.edit_brand', compact('brand', 'categories', 'subcategories'));
+    }
+    
 
-    public function update(Request $request, $id)
+    public function updateBrand(Request $request, $id)
     {
         $request->validate([
             'brand_name' => 'required|string|max:255',
             'is_top' => 'required|boolean',
-            'tbl_image' => 'nullable|string|max:255',
+            'cat_id' => 'required|exists:tbl_categories,id',
+            'sub_cat_id' => 'required|exists:tbl_sub_categories,id', 
         ]);
-
+    
         $brand = tbl_brand::findOrFail($id);
-
+    
         $brand->update([
             'brand_name' => $request->input('brand_name'),
             'is_top' => $request->input('is_top'),
-            'tbl_image' => $request->input('tbl_image'),
+            'cat_id' => $request->input('cat_id'),
+            'sub_cat_id' => $request->input('sub_cat_id'),
         ]);
-
-        return response()->json([
-            'success' => true,
-            'brand' => $brand
-        ], 200);
+    
+        return redirect()->route('admin.edit_brand')->with('success', 'Brand updated successfully');
     }
 
    
-    public function destroy($id)
+    public function destroyBrand($id)
     {
         $brand = tbl_brand::findOrFail($id);
         $brand->delete();
