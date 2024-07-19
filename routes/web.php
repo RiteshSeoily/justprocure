@@ -86,7 +86,7 @@ Route::middleware('admin.auth')->group(function () {
      Route::get('/subcategories/{id}', [CategoryController::class, 'allSubCatbyCatId'])->name('admin.seller.subcategory');
      Route::get('/subsubcategories/{id}', [CategoryController::class, 'getSubSubCategories'])->name('admin.seller.subsubcategory');
      Route::get('/brand', [CategoryController::class, 'allbrandname'])->name('admin.seller.brand');
-
+     Route::get('/brand-count', [CategoryController::class, 'getBrandCount'])->name('admin.brand.count');
 
 
     //commission Controller Section

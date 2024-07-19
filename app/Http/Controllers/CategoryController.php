@@ -40,6 +40,17 @@ class CategoryController extends Controller
         return view('admin.all_brands', compact('brands'));
     }
 
+
+    public function getBrandCount()
+    {
+        
+        $brandCount = tbl_brand::count();
+        return response()->json([
+            'success' => true,
+            'brand_count' => $brandCount
+        ], 200);
+    }
+
     public function allSubCatbyCatId($id)
     {
         // inner join
