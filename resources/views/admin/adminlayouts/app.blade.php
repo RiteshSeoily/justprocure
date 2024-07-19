@@ -194,7 +194,7 @@
 
                         // Append categories to the dropdown
                         categories.forEach(category => {
-                            dropdown.append(`<a href="all-buyer">- ${category.category_name}</a><br>`);
+                            dropdown.append(`<a href="/products-by-category/${category.category_name}">- ${category.category_name}</a><br>`);
                         });
 
                         // Append static links

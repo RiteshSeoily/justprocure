@@ -79,7 +79,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-    
+    Route::get('/products-by-category/{categoryName}', [ProductController::class, 'getProductsByCategory']);
 
     // category
      Route::get('/categories', [CategoryController::class, 'allCategoryname'])->name('admin.seller.category');

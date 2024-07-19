@@ -16,9 +16,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('buyer_id')->nullable(); // buyer_id column (int(11))
             $table->foreign('buyer_id')->references('id')->on('buyers')->onDelete('cascade');
-            $table->integer('cat_id')->nullable(); // cat_id column (int(11))
-            $table->integer('sub_cat_id')->nullable(); // sub_cat_id column (int(11))
-            $table->integer('brand_id')->nullable(); // brand_id column (int(11))
+            $table->unsignedBigInteger('cat_id')->nullable(); // cat_id column (int(11))
+            $table->foreign('cat_id')->references('id')->on('tbl-categories')->onDelete('cascade');
+            $table->unsignedBigInteger('sub_cat_id')->nullable(); // sub_cat_id column (int(11))
+            $table->foreign('sub_cat_id')->references('id')->on('tbl_sub_categories')->onDelete('cascade');
+            $table->unsignedBigInteger('brand_id')->nullable(); // brand_id column (int(11))
+            $table->foreign('brand_id')->references('id')->on('tbl_brands')->onDelete('cascade');
             $table->string('product_name', 255); // product_name column (varchar(255))
             $table->string('material_code', 191)->nullable(); // material_code column (varchar(191))
             $table->string('hsn', 191)->nullable(); // hsn column (varchar(191))

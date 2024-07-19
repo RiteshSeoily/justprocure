@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\tbl_product;
 use App\Models\tbl_product_detail; 
+use App\Models\tbl_category;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -85,4 +87,21 @@ class ProductController extends Controller
         return redirect()->route('products.allproducts')->with('success', 'Product details updated successfully.');
     } 
    
+
+    public function getProductsByCategory($categoryName)
+    {
+     
+        $category = tbl_category::where('category_name', $categoryName)->first();
+
+        if (!$category) {
+            return response()->json(['error' => 'Category not found'], 404);
+        }
+
+       
+        $products = tbl_product::with(['details', 'category'])
+            ->where('cat_id', $category->id)
+            ->get();
+
+            return view('admin.productbycat', compact('products'));
+    }
 }
