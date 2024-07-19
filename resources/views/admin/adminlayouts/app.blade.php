@@ -171,7 +171,7 @@
         }
 
         // Event listener for the Export button
-        document.querySelector(".back-button-for-rfq-buyer").addEventListener("click", function() {
+        document.querySelector(".csvdownload").addEventListener("click", function() {
             exportTableToCSV('table_data.csv');
         });
     });

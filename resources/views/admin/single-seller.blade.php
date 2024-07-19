@@ -100,7 +100,7 @@
                                 </form>
                             </div>
 
-                            <button class="back-button-for-rfq-buyer" onclick="" tabindex="-1" aria-disabled="true">
+                            <button class="back-button-for-rfq-buyer csvdownload" onclick="" tabindex="-1" aria-disabled="true">
                                 Export
                             </button>
 
@@ -133,7 +133,7 @@
                                             <td class="buyer-dashboard-right-border">{{ $seller->gst_number }}</td>
                                             <td class="buyer-dashboard-right-border">{{ $seller->pan_number }}</td>
                                             <td class="buyer-dashboard-right-border">{{ $seller->address }}</td>
-                                            <td class="buyer-dashboard-right-border">{{ $seller->company_name}}</td>
+                                            <td class="buyer-dashboard-right-border">{{ $seller->propitier_name }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

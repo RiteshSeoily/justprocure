@@ -87,7 +87,10 @@ Route::middleware('admin.auth')->group(function () {
      Route::get('/subsubcategories/{id}', [CategoryController::class, 'getSubSubCategories'])->name('admin.seller.subsubcategory');
      Route::get('/brand', [CategoryController::class, 'allbrandname'])->name('admin.seller.brand');
      Route::get('/brand-count', [CategoryController::class, 'getBrandCount'])->name('admin.brand.count');
-
+     Route::get('/brands/create', [CategoryController::class, 'showCreateForm'])->name('admin.brand.create.form');
+     Route::post('/brands/create', [CategoryController::class, 'create'])->name('admin.brand.create');
+     Route::put('/brands/update/{id}', [CategoryController::class, 'update'])->name('admin.brand.update');
+     Route::delete('/brands/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.brand.delete');
 
     //commission Controller Section
     Route::get('/commission', [Commission::class, 'showCommission'])->name('admin.commission');

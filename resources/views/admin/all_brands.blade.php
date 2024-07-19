@@ -77,6 +77,13 @@
          <div class="dashboard__content bg-color-buyer-dashboard">
             <div class="row">
                <div class="col-xl-12">
+               <div class="back-and-forward-button-rfqs-page-buyer">
+                            <a href = "{{ route('admin.brand.create.form')}}">
+                            <button class="back-button-for-rfq-buyer" tabindex="-1" aria-disabled="true">
+                                <span class="fa fa-plus"></span> ADD PRODUCT
+                            </button>
+                            </a>
+                        </div>
                   <div class="admin-dashboard-searchbar-radio-button-outer">
                      <!-- Search and radio buttons section -->
                   </div>
@@ -114,7 +121,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="list-inline-item mb-1">
-                                                        <a href="#" class="delete-product" data-id="" data-url="3" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" aria-label="Delete">
+                                                        <a href="#" class="delete-product" data-id="{{ $brand->id }}" data-url="{{ route('admin.brand.delete', $brand->id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" aria-label="Delete">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </li>
@@ -132,5 +139,63 @@
       </div>
    </div>
 </div>
+
+
+<script>
+    $(document).ready(function() {
+      //   $('#productsTable').DataTable();
+
+        $(document).on('click', '.delete-product', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var url = $(this).data('url');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: 'POST', // Should be 'DELETE'
+                        data: {
+                            _method: 'DELETE',
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your product has been deleted.',
+                                    'success'
+                                ).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire(
+                                    'Error!',
+                                    'Failed to delete the product.',
+                                    'error'
+                                );
+                            }
+                        },
+                        error: function(response) {
+                            Swal.fire(
+                                'Error!',
+                                'An error occurred while deleting the product.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
 
 @endsection

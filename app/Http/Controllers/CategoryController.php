@@ -23,34 +23,6 @@ class CategoryController extends Controller
         ], 200);
     }
 
-    public function allBrandname()
-    {
-        // Fetch all brands
-        $brands = tbl_brand::all();
-
-        // Return brands as JSON for AJAX request
-        if (request()->wantsJson()) {
-            return response()->json([
-                'success' => true,
-                'brands' => $brands
-            ], 200);
-        }
-
-        // Return the view with the brands
-        return view('admin.all_brands', compact('brands'));
-    }
-
-
-    public function getBrandCount()
-    {
-        
-        $brandCount = tbl_brand::count();
-        return response()->json([
-            'success' => true,
-            'brand_count' => $brandCount
-        ], 200);
-    }
-
     public function allSubCatbyCatId($id)
     {
         // inner join
@@ -97,5 +69,110 @@ class CategoryController extends Controller
         ], 200);
     }
 
+
+
+
+
+    // brand controllers
+
+
+
+         
+
+    public function showCreateForm()
+    {
+        $categories = tbl_category::all();
+        $subcategories = tbl_sub_category::all();
+        return view('admin.create_brand', compact('categories', 'subcategories'));
+    }
+    
+
+    public function allBrandname()
+    {
+        // Fetch all brands
+        $brands = tbl_brand::all();
+
+        // Return brands as JSON for AJAX request
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'brands' => $brands
+            ], 200);
+        }
+
+        // Return the view with the brands
+        return view('admin.all_brands', compact('brands'));
+    }
+
+    public function create(Request $request)
+    {
+        $request->validate([
+            'brand_name' => 'required|string|max:255',
+            'is_top' => 'required|boolean',
+            'tbl_image' => 'nullable|string|max:255',
+            'cat_id' => 'required|exists:tbl_categories,id',
+            'sub_cat_id' => 'required|exists:tbl_sub_categories,id', 
+        ]);
+    
+        $brand = tbl_brand::create([
+            'brand_name' => $request->input('brand_name'),
+            'is_top' => $request->input('is_top'),
+            'tbl_image' => $request->input('tbl_image'),
+            'cat_id' => $request->input('cat_id'),
+            'sub_cat_id' => $request->input('sub_cat_id'),
+        ]);
+    
+        return redirect()->route('admin.seller.brand')->with('success', 'Brand created successfully');
+    }
+    
+
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'brand_name' => 'required|string|max:255',
+            'is_top' => 'required|boolean',
+            'tbl_image' => 'nullable|string|max:255',
+        ]);
+
+        $brand = tbl_brand::findOrFail($id);
+
+        $brand->update([
+            'brand_name' => $request->input('brand_name'),
+            'is_top' => $request->input('is_top'),
+            'tbl_image' => $request->input('tbl_image'),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'brand' => $brand
+        ], 200);
+    }
+
+   
+    public function destroy($id)
+    {
+        $brand = tbl_brand::findOrFail($id);
+        $brand->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Brand deleted successfully'
+        ], 200);
+    }
+
+
+
+    public function getBrandCount()
+    {
+        
+        $brandCount = tbl_brand::count();
+        return response()->json([
+            'success' => true,
+            'brand_count' => $brandCount
+        ], 200);
+    }
+
+ 
 
 }

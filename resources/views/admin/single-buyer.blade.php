@@ -100,7 +100,7 @@
                                     <button class="searchbar-icon-admin-dashboard" type="submit"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
-                            <button class="back-button-for-rfq-buyer" onclick="" tabindex="-1" aria-disabled="true">
+                            <button class="back-button-for-rfq-buyer csvdownload" onclick="" tabindex="-1" aria-disabled="true">
                                 Export
                             </button>
                             <button class="back-button-for-rfq-buyer" onclick="" tabindex="-1" aria-disabled="true"><span class="fa fa-arrow-left"></span> BACK</button>
